@@ -1,11 +1,11 @@
 {
-  "name": "spartan-ui-mcp",
-  "version": "2.0.0",
+  "name": "spartan-ng-mcp",
+  "version": "1.0.0",
   "description": "MCP server exposing Spartan Angular UI documentation and component tools.",
   "main": "server.js",
   "type": "module",
   "bin": {
-    "spartan-ui-mcp": "./server.js"
+    "spartan-ui-mcp": "server.js"
   },
   "files": [
     "server.js",
@@ -32,7 +32,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SOG-web/spartan-ui-mcp.git"
+    "url": "git+https://github.com/SOG-web/spartan-ui-mcp.git"
   },
   "bugs": {
     "url": "https://github.com/SOG-web/spartan-ui-mcp/issues"
@@ -46,6 +46,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@types/node": "^24.7.1",
     "husky": "9.1.7"
   }
