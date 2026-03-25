@@ -18,9 +18,9 @@ Configure your MCP client (Claude Desktop, Cursor, VS Code, etc.):
 ```json
 {
   "mcpServers": {
-    "spartan-ui-mcp": {
+    "spartan-ng-mcp": {
       "command": "npx",
-      "args": ["spartan-ui-mcp"]
+      "args": ["spartan-ng-mcp"]
     }
   }
 }
@@ -33,9 +33,9 @@ For block source code and component source fetching, a GitHub token gives you 50
 ```json
 {
   "mcpServers": {
-    "spartan-ui-mcp": {
+    "spartan-ng-mcp": {
       "command": "npx",
-      "args": ["spartan-ui-mcp"],
+      "args": ["spartan-ng-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token_here"
       }
@@ -64,8 +64,8 @@ Classic tokens also work: create one at [github.com/settings/tokens/new](https:/
 ### Development Setup
 
 ```bash
-git clone https://github.com/SOG-web/spartan-ui-mcp.git
-cd spartan-ui-mcp
+git clone https://github.com/carlospalacin/spartan-ng-mcp.git
+cd spartan-ng-mcp
 npm install
 npm start        # or: npm run dev (auto-reload)
 ```
@@ -74,40 +74,40 @@ npm start        # or: npm run dev (auto-reload)
 
 ### Components
 
-| Tool | Description |
-|------|-------------|
-| `spartan_components_list` | List all 57 components with URLs |
-| `spartan_components_get` | Get structured API data (Brain/Helm directives, inputs, outputs, examples). Uses the Spartan Analog API for perfect data quality. |
-| `spartan_components_source` | Fetch actual TypeScript source code from GitHub (`libs/brain/` or `libs/helm/`) |
-| `spartan_components_dependencies` | Get the canonical dependency graph for any component |
+| Tool                              | Description                                                                                                                       |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `spartan_components_list`         | List all 57 components with URLs                                                                                                  |
+| `spartan_components_get`          | Get structured API data (Brain/Helm directives, inputs, outputs, examples). Uses the Spartan Analog API for perfect data quality. |
+| `spartan_components_source`       | Fetch actual TypeScript source code from GitHub (`libs/brain/` or `libs/helm/`)                                                   |
+| `spartan_components_dependencies` | Get the canonical dependency graph for any component                                                                              |
 
 ### Blocks
 
-| Tool | Description |
-|------|-------------|
-| `spartan_blocks_list` | List all building block categories and variants |
-| `spartan_blocks_get` | Fetch complete block source code from GitHub. Returns Angular component files with template, imports, and extracted Spartan/Angular dependencies. |
+| Tool                  | Description                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `spartan_blocks_list` | List all building block categories and variants                                                                                                   |
+| `spartan_blocks_get`  | Fetch complete block source code from GitHub. Returns Angular component files with template, imports, and extracted Spartan/Angular dependencies. |
 
 ### Search & Documentation
 
-| Tool | Description |
-|------|-------------|
-| `spartan_search` | Instant search across components by name, selector, directive, or input/output property |
-| `spartan_docs_get` | Fetch documentation topics (installation, theming, CLI, dark-mode, etc.) |
-| `spartan_meta` | Get full metadata for autocomplete (all components, blocks, and tool usage) |
+| Tool               | Description                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| `spartan_search`   | Instant search across components by name, selector, directive, or input/output property |
+| `spartan_docs_get` | Fetch documentation topics (installation, theming, CLI, dark-mode, etc.)                |
+| `spartan_meta`     | Get full metadata for autocomplete (all components, blocks, and tool usage)             |
 
 ### Health & Cache
 
-| Tool | Description |
-|------|-------------|
-| `spartan_health_check` | Check spartan.ng page availability |
-| `spartan_health_instructions` | Get Spartan CLI health check instructions |
-| `spartan_health_command` | Build `ng`/`nx` health check commands |
-| `spartan_cache_status` | View cache statistics |
-| `spartan_cache_clear` | Clear cached data |
-| `spartan_cache_rebuild` | Rebuild cache (components, docs, and optionally blocks from GitHub) |
-| `spartan_cache_switch_version` | Switch Spartan UI version for caching |
-| `spartan_cache_list_versions` | List all cached versions |
+| Tool                           | Description                                                         |
+| ------------------------------ | ------------------------------------------------------------------- |
+| `spartan_health_check`         | Check spartan.ng page availability                                  |
+| `spartan_health_instructions`  | Get Spartan CLI health check instructions                           |
+| `spartan_health_command`       | Build `ng`/`nx` health check commands                               |
+| `spartan_cache_status`         | View cache statistics                                               |
+| `spartan_cache_clear`          | Clear cached data                                                   |
+| `spartan_cache_rebuild`        | Rebuild cache (components, docs, and optionally blocks from GitHub) |
+| `spartan_cache_switch_version` | Switch Spartan UI version for caching                               |
+| `spartan_cache_list_versions`  | List all cached versions                                            |
 
 ## Resources
 
@@ -160,7 +160,7 @@ flowchart TB
         C3["Prompts"]
     end
 
-    subgraph Server["spartan-ui-mcp (stdio)"]
+    subgraph Server["spartan-ng-mcp (stdio)"]
         direction TB
         Router["server.js — Router"]
 
@@ -221,12 +221,12 @@ flowchart TB
 
 The server uses a hybrid approach for maximum data quality:
 
-| Source | Used For | Method |
-|--------|----------|--------|
-| Spartan Analog API | Component APIs, examples, install snippets | Single JSON endpoint for all 57 components |
-| GitHub API (`spartan-ng/spartan`) | Block source code, component TypeScript source | Contents API with in-memory caching |
-| spartan.ng website | Documentation pages, HTML content | HTTP fetch with file-based caching |
-| Spartan CLI metadata | Dependency graph (canonical) | Embedded from `primitive-deps.ts` |
+| Source                            | Used For                                       | Method                                     |
+| --------------------------------- | ---------------------------------------------- | ------------------------------------------ |
+| Spartan Analog API                | Component APIs, examples, install snippets     | Single JSON endpoint for all 57 components |
+| GitHub API (`spartan-ng/spartan`) | Block source code, component TypeScript source | Contents API with in-memory caching        |
+| spartan.ng website                | Documentation pages, HTML content              | HTTP fetch with file-based caching         |
+| Spartan CLI metadata              | Dependency graph (canonical)                   | Embedded from `primitive-deps.ts`          |
 
 ## Caching
 
@@ -237,12 +237,12 @@ Two layers:
 
 ## Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `GITHUB_TOKEN` | — | GitHub PAT for higher rate limits (5000/hr vs 60/hr) |
-| `SPARTAN_CACHE_TTL_HOURS` | `24` | File cache TTL in hours |
-| `SPARTAN_CACHE_TTL_MS` | `300000` | In-memory cache TTL in ms |
-| `SPARTAN_FETCH_TIMEOUT_MS` | `15000` | HTTP request timeout in ms |
+| Variable                   | Default  | Description                                          |
+| -------------------------- | -------- | ---------------------------------------------------- |
+| `GITHUB_TOKEN`             | —        | GitHub PAT for higher rate limits (5000/hr vs 60/hr) |
+| `SPARTAN_CACHE_TTL_HOURS`  | `24`     | File cache TTL in hours                              |
+| `SPARTAN_CACHE_TTL_MS`     | `300000` | In-memory cache TTL in ms                            |
+| `SPARTAN_FETCH_TIMEOUT_MS` | `15000`  | HTTP request timeout in ms                           |
 
 ## Testing
 

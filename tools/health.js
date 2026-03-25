@@ -26,15 +26,17 @@ export function registerHealthTools(server) {
               "figma",
               "changelog",
               "about",
-            ])
+            ]),
           )
           .optional()
-          .describe("Docs topics to check; defaults to a small representative set."),
+          .describe(
+            "Docs topics to check; defaults to a small representative set.",
+          ),
         components: z
           .array(z.string())
           .optional()
           .describe(
-            "Component names to check; defaults to a small representative set."
+            "Component names to check; defaults to a small representative set.",
           ),
       },
     },
@@ -54,7 +56,7 @@ export function registerHealthTools(server) {
         const timeout = setTimeout(() => controller.abort(), 15000);
         try {
           const res = await fetch(url, {
-            headers: { "User-Agent": "spartan-ui-mcp/2.0" },
+            headers: { "User-Agent": "spartan-ng-mcp/2.0" },
             signal: controller.signal,
           });
           const ok = res.ok;
@@ -69,7 +71,10 @@ export function registerHealthTools(server) {
             ok: false,
             status: 0,
             ms,
-            error: err.name === "AbortError" ? "Request timed out" : "Request failed",
+            error:
+              err.name === "AbortError"
+                ? "Request timed out"
+                : "Request failed",
           });
         } finally {
           clearTimeout(timeout);
@@ -95,7 +100,7 @@ export function registerHealthTools(server) {
       return {
         content: [{ type: "text", text: JSON.stringify(summary, null, 2) }],
       };
-    }
+    },
   );
 
   // Official instructions per docs
@@ -123,7 +128,7 @@ export function registerHealthTools(server) {
       return {
         content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
       };
-    }
+    },
   );
 
   // Command builder for ng/nx with optional --dry-run
@@ -152,6 +157,6 @@ export function registerHealthTools(server) {
           : "npx nx g @spartan-ng/cli:healthcheck";
       const command = dryRun ? `${base} --dry-run` : base;
       return { content: [{ type: "text", text: command }] };
-    }
+    },
   );
 }

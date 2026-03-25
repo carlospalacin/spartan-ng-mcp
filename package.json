@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "bin": {
-    "spartan-ui-mcp": "server.js"
+    "spartan-ng-mcp": "server.js"
   },
   "files": [
     "server.js",
@@ -15,7 +15,7 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test": "echo \"No tests configured\" && exit 0",
-    "prepublish": "echo 'Ready to publish spartan-ui-mcp'",
+    "prepublish": "echo 'Ready to publish spartan-ng-mcp'",
     "prepare": "husky || true"
   },
   "keywords": [
@@ -24,20 +24,20 @@
     "spartan",
     "angular",
     "ui",
-    "spartan-ui",
+    "spartan-ng",
     "components",
     "documentation"
   ],
-  "author": "Olaleka Raheem <raheemolalekausman84@gmail.com>",
+  "author": "Carlos Palacin",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SOG-web/spartan-ui-mcp.git"
+    "url": "git+https://github.com/carlospalacin/spartan-ng-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/SOG-web/spartan-ui-mcp/issues"
+    "url": "https://github.com/carlospalacin/spartan-ng-mcp/issues"
   },
-  "homepage": "https://github.com/SOG-web/spartan-ui-mcp#readme",
+  "homepage": "https://github.com/carlospalacin/spartan-ng-mcp#readme",
   "engines": {
     "node": ">=18.0.0"
   },

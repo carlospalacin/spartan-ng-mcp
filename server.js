@@ -15,7 +15,7 @@ import { registerPromptHandlers } from "./tools/prompts.js";
 import { registerCacheTools } from "./tools/cache-tools.js";
 
 const server = new McpServer({
-  name: "spartan-ui-mcp",
+  name: "spartan-ng-mcp",
   version: "2.0.0",
   description:
     "MCP server exposing Spartan Angular UI components, blocks, and documentation. " +

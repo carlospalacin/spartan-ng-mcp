@@ -53,7 +53,7 @@ const rateLimitInfo = {
  */
 function getHeaders() {
   const headers = {
-    "User-Agent": "spartan-ui-mcp/2.0",
+    "User-Agent": "spartan-ng-mcp/2.0",
     Accept: "application/vnd.github.v3+json",
   };
   const token = process.env.GITHUB_TOKEN;
@@ -115,7 +115,7 @@ async function githubFetch(url, headers) {
     const resetDate = new Date(rateLimitInfo.resetAt).toISOString();
     throw new Error(
       `GitHub API rate limit exhausted. Resets at ${resetDate}. ` +
-        `Set GITHUB_TOKEN env var for 5000 req/hr.`
+        `Set GITHUB_TOKEN env var for 5000 req/hr.`,
     );
   }
 
@@ -132,7 +132,7 @@ async function githubFetch(url, headers) {
     if (!res.ok) {
       if (res.status === 403 && rateLimitInfo.remaining === 0) {
         throw new Error(
-          "GitHub API rate limit exceeded. Set GITHUB_TOKEN env var for higher limits."
+          "GitHub API rate limit exceeded. Set GITHUB_TOKEN env var for higher limits.",
         );
       }
       if (res.status === 404) {
@@ -200,7 +200,9 @@ export async function fetchGitHubDirectory(dirPath, noCache = false) {
   const json = await res.json();
 
   if (!Array.isArray(json)) {
-    throw new Error(`Expected directory listing but got single entry at ${dirPath}`);
+    throw new Error(
+      `Expected directory listing but got single entry at ${dirPath}`,
+    );
   }
 
   /** @type {GitHubDirEntry[]} */
@@ -234,7 +236,7 @@ export async function fetchGitHubRaw(filePath, noCache = false) {
 
   const url = `${GITHUB_RAW_BASE}/${SPARTAN_REPO}/${SPARTAN_REPO_BRANCH}/${filePath}`;
   const res = await githubFetch(url, {
-    "User-Agent": "spartan-ui-mcp/2.0",
+    "User-Agent": "spartan-ng-mcp/2.0",
   });
   const content = await res.text();
 
@@ -259,7 +261,8 @@ export async function fetchGitHubDirectoryFiles(dirPath, noCache = false) {
 
   const entries = await fetchGitHubDirectory(dirPath, noCache);
   const tsFiles = entries.filter(
-    (e) => e.type === "file" && (e.name.endsWith(".ts") || e.name.endsWith(".js"))
+    (e) =>
+      e.type === "file" && (e.name.endsWith(".ts") || e.name.endsWith(".js")),
   );
 
   const files = [];

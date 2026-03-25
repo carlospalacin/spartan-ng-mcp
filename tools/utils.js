@@ -74,14 +74,8 @@ export const KNOWN_COMPONENTS = [
  */
 export const KNOWN_BLOCKS = {
   sidebar: ["sidebar-sticky-header", "sidebar-inset"],
-  login: [
-    "login-simple-reactive-form",
-    "login-two-column-reactive-form",
-  ],
-  signup: [
-    "signup-simple-reactive-form",
-    "signup-two-column-reactive-form",
-  ],
+  login: ["login-simple-reactive-form", "login-two-column-reactive-form"],
+  signup: ["signup-simple-reactive-form", "signup-two-column-reactive-form"],
   calendar: [
     "calendar-simple",
     "calendar-multi",
@@ -98,23 +92,18 @@ export const KNOWN_BLOCKS = {
 };
 
 /** All block category names */
-export const BLOCK_CATEGORIES = /** @type {Array<keyof typeof KNOWN_BLOCKS>} */ (
-  Object.keys(KNOWN_BLOCKS)
-);
+export const BLOCK_CATEGORIES =
+  /** @type {Array<keyof typeof KNOWN_BLOCKS>} */ (Object.keys(KNOWN_BLOCKS));
 
 /**
  * GitHub paths for block source code in the spartan-ng/spartan repo.
  * sidebar/login/signup live under blocks-preview, calendar under blocks.
  */
 export const BLOCK_GITHUB_PATHS = {
-  sidebar:
-    "apps/app/src/app/pages/(blocks-preview)/blocks-preview",
-  login:
-    "apps/app/src/app/pages/(blocks-preview)/blocks-preview",
-  signup:
-    "apps/app/src/app/pages/(blocks-preview)/blocks-preview",
-  calendar:
-    "apps/app/src/app/pages/(blocks)/blocks/calendar",
+  sidebar: "apps/app/src/app/pages/(blocks-preview)/blocks-preview",
+  login: "apps/app/src/app/pages/(blocks-preview)/blocks-preview",
+  signup: "apps/app/src/app/pages/(blocks-preview)/blocks-preview",
+  calendar: "apps/app/src/app/pages/(blocks)/blocks/calendar",
 };
 
 /** GitHub path for shared block utilities (sidebar nav components, data, etc.) */
@@ -145,7 +134,15 @@ export const COMPONENT_DEPENDENCIES = {
   combobox: ["utils", "input-group", "button", "icon"],
   command: ["utils", "button", "icon"],
   "context-menu": ["utils", "dropdown-menu"],
-  "data-table": ["utils", "table", "button", "checkbox", "icon", "select", "input"],
+  "data-table": [
+    "utils",
+    "table",
+    "button",
+    "checkbox",
+    "icon",
+    "select",
+    "input",
+  ],
   "date-picker": ["utils", "calendar", "icon", "popover"],
   dialog: ["utils", "icon"],
   "dropdown-menu": ["utils", "icon"],
@@ -172,7 +169,16 @@ export const COMPONENT_DEPENDENCIES = {
   select: ["utils", "icon"],
   separator: ["utils"],
   sheet: ["utils", "icon", "button"],
-  sidebar: ["utils", "button", "icon", "input", "separator", "sheet", "skeleton", "tooltip"],
+  sidebar: [
+    "utils",
+    "button",
+    "icon",
+    "input",
+    "separator",
+    "sheet",
+    "skeleton",
+    "tooltip",
+  ],
   skeleton: ["utils"],
   slider: ["utils"],
   sonner: ["utils"],
@@ -225,7 +231,11 @@ const SPARTAN_API_CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
  */
 export async function fetchSpartanAPI(noCache = false) {
   const now = Date.now();
-  if (!noCache && _spartanAPICache && now - _spartanAPICacheTimestamp < SPARTAN_API_CACHE_TTL_MS) {
+  if (
+    !noCache &&
+    _spartanAPICache &&
+    now - _spartanAPICacheTimestamp < SPARTAN_API_CACHE_TTL_MS
+  ) {
     return _spartanAPICache;
   }
 
@@ -235,7 +245,7 @@ export async function fetchSpartanAPI(noCache = false) {
   try {
     const res = await fetch(SPARTAN_API_URL, {
       headers: {
-        "User-Agent": "spartan-ui-mcp/2.0",
+        "User-Agent": "spartan-ng-mcp/2.0",
         Accept: "application/json",
       },
       signal: controller.signal,
@@ -367,7 +377,9 @@ export async function fetchContent(url, format = "html", noCache = false) {
     throw new Error("Invalid URL provided");
   }
   if (!ALLOWED_HOSTS.includes(parsedUrl.hostname)) {
-    throw new Error(`Blocked request to disallowed host: ${parsedUrl.hostname}`);
+    throw new Error(
+      `Blocked request to disallowed host: ${parsedUrl.hostname}`,
+    );
   }
 
   const ttlMs = Number(process.env.SPARTAN_CACHE_TTL_MS || 5 * 60 * 1000);
@@ -387,7 +399,7 @@ export async function fetchContent(url, format = "html", noCache = false) {
 
   try {
     const res = await fetch(url, {
-      headers: { "User-Agent": "spartan-ui-mcp/2.0" },
+      headers: { "User-Agent": "spartan-ng-mcp/2.0" },
       signal: controller.signal,
     });
     if (!res.ok) {
@@ -489,10 +501,10 @@ export function extractAPIInfo(html) {
     // Extract only the visible documentation section, not embedded JSON
     // Look for Brain API and Helm API sections in the visible HTML
     const brainAPIMatch = html.match(
-      /<h[1-6][^>]*>Brain API<\/h[1-6]>([\s\S]*?)(?=<h[1-6][^>]*>(?:Helm API|On this page|$)|$)/i
+      /<h[1-6][^>]*>Brain API<\/h[1-6]>([\s\S]*?)(?=<h[1-6][^>]*>(?:Helm API|On this page|$)|$)/i,
     );
     const helmAPIMatch = html.match(
-      /<h[1-6][^>]*>Helm API<\/h[1-6]>([\s\S]*?)(?=<h[1-6][^>]*>(?:On this page|$)|$)/i
+      /<h[1-6][^>]*>Helm API<\/h[1-6]>([\s\S]*?)(?=<h[1-6][^>]*>(?:On this page|$)|$)/i,
     );
 
     // Parse Brain API section
@@ -574,7 +586,7 @@ function extractPropsFromTable(html, tableType) {
   // Look for the table section
   const tableSectionRegex = new RegExp(
     `<h[1-6][^>]*>${tableType}<\\/h[1-6]>([\\s\\S]*?)(?=<h[1-6]|$)`,
-    "i"
+    "i",
   );
   const tableSectionMatch = html.match(tableSectionRegex);
 
@@ -646,4 +658,3 @@ function detectLanguage(code) {
   }
   return "typescript"; // default
 }
-
