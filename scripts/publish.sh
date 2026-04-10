@@ -34,7 +34,7 @@ git_switch_and_pull() {
 }
 
 # === Previous checks ===
-for cmd in git npm node; do
+for cmd in git pnpm node; do
     command -v $cmd >/dev/null 2>&1 || {
         echo -e "${RED}❌ Required command '$cmd' not found. Exiting.${RESET}"
         exit 1
@@ -62,19 +62,19 @@ done
 # --- Step 3: Switch to main branch and pull ---
 git_switch_and_pull "$MAIN_BRANCH"
 
-# --- Step 4: Bump version using npm ---
+# --- Step 4: Bump version using pnpm ---
 CURRENT_VERSION=$(node -p "require('./package.json').version")
-npm version "$BUMP_TYPE" --no-git-tag-version --silent > /dev/null 2>&1
+pnpm version "$BUMP_TYPE" --no-git-tag-version --silent > /dev/null 2>&1
 NEW_VERSION=$(node -p "require('./package.json').version")
 log GREEN "→ Bumped version: $CURRENT_VERSION → $NEW_VERSION"
 
 # --- Step 5: Update lockfile ---
-log BLUE "→ Running npm install..."
-npm install > /dev/null 2>&1
+log BLUE "→ Running pnpm install..."
+pnpm install > /dev/null 2>&1
 
 # --- Step 6: Commit and push version bump ---
 log GREEN "→ Commit version: $NEW_VERSION"
-git add package.json package-lock.json > /dev/null 2>&1
+git add package.json pnpm-lock.yaml > /dev/null 2>&1
 git commit -m "v$NEW_VERSION" > /dev/null 2>&1
 git push origin "$MAIN_BRANCH" > /dev/null 2>&1
 
@@ -85,7 +85,7 @@ git push origin "v$NEW_VERSION" > /dev/null 2>&1
 
 # --- Step 8: Publish package ---
 log BLUE "→ Publishing package..."
-npm publish
+pnpm publish
 
 # --- Done ---
 log GREEN "✅ Publishing complete. Version: v$NEW_VERSION"
