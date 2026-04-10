@@ -1,6 +1,6 @@
 {
   "name": "spartan-ng-mcp",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "MCP server for the Spartan Angular UI ecosystem — component discovery, source code, installation commands, and project context",
   "type": "module",
   "main": "dist/index.js",
