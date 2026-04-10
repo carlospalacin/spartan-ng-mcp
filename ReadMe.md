@@ -1,41 +1,46 @@
-# Spartan UI MCP Server
+# spartan-ng-mcp
 
-An MCP (Model Context Protocol) server that gives AI assistants full access to the [Spartan Angular UI](https://www.spartan.ng) ecosystem — components, blocks, source code, and documentation.
+An MCP (Model Context Protocol) server that exposes the **Spartan Angular UI** ecosystem as intelligent tools for AI-powered IDEs and assistants. Discover components, browse Brain/Helm APIs, fetch source code, generate install commands, detect project context, and use page-level building blocks — all through the MCP protocol.
 
-## What It Does
+## Why
 
-- **57 UI Components** with structured API data (Brain & Helm APIs) — selectors, inputs, outputs, models, and code examples
-- **17 Building Blocks** — complete page-level Angular components (sidebar layouts, login/signup forms, calendar interfaces) fetched from GitHub
-- **TypeScript Source Code** — actual component library source from the `spartan-ng/spartan` repository
-- **Canonical Dependency Graph** — real component dependencies from the Spartan CLI
-- **Documentation** — 13 topics including installation, theming, CLI usage, and more
-- **Instant Search** — search across all components by name, selector, directive, or property
+Spartan's dual-layer architecture (Brain for headless logic + Helm for styled components) is powerful but has a learning curve. AI assistants need structured access to component APIs, source code, and installation patterns to generate correct Angular code. This MCP server bridges that gap — turning the entire Spartan ecosystem into a queryable, context-aware tool surface.
+
+## Features
+
+- **56 components** with full Brain/Helm API details (directives, inputs, outputs, signal models)
+- **17 page-level blocks** (sidebar, login, signup, calendar variants)
+- **Fuzzy search** across components, blocks, and documentation
+- **TypeScript source code** fetching from GitHub with intelligent caching
+- **Project context detection** — Angular version, Nx workspace, Tailwind config, zoneless mode
+- **Installation command generation** — `nx generate` or `npm install` with peer dependency resolution
+- **Post-install audit** — verification checklist for Tailwind preset, Brain/Helm pairing, OnPush
+- **Runtime registry refresh** — pick up new Spartan components without an MCP update
+- **Skills installer** — deploy [spartan-ng-skills](https://github.com/jcpalaci/spartan-ng-skills) to any Angular project
 
 ## Quick Start
 
-Configure your MCP client (Claude Desktop, Cursor, VS Code, etc.):
+### 1. Install & Build
 
-```json
-{
-  "mcpServers": {
-    "spartan-ng-mcp": {
-      "command": "npx",
-      "args": ["-y", "spartan-ng-mcp"]
-    }
-  }
-}
+```bash
+git clone https://github.com/jcpalaci/spartan-ng-mcp.git
+cd spartan-ng-mcp
+npm install
+npm run build
 ```
 
-### With GitHub Token (recommended)
+### 2. Configure Your IDE
 
-For block source code and component source fetching, a GitHub token gives you 5000 req/hr instead of 60:
+#### Claude Code
+
+Add to your project's `.mcp.json`:
 
 ```json
 {
   "mcpServers": {
-    "spartan-ng-mcp": {
-      "command": "npx",
-      "args": ["-y", "spartan-ng-mcp"],
+    "spartan-ng": {
+      "command": "node",
+      "args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token_here"
       }
@@ -44,216 +49,259 @@ For block source code and component source fetching, a GitHub token gives you 50
 }
 ```
 
-No special scopes needed — the token just authenticates against the public repo.
+#### Cursor
 
-<details>
-<summary><strong>How to get a GitHub token</strong></summary>
+Add to `.cursor/mcp.json`:
 
-1. Go to [github.com/settings/tokens](https://github.com/settings/tokens?type=beta)
-2. Click **"Generate new token"** > **"Fine-grained token"**
-3. Give it a name (e.g., `spartan-mcp`)
-4. Set expiration (90 days or custom)
-5. Under **"Repository access"**, select **"Public Repositories (read-only)"**
-6. No additional permissions needed — leave everything else as default
-7. Click **"Generate token"** and copy the `github_pat_...` value
-
-Classic tokens also work: create one at [github.com/settings/tokens/new](https://github.com/settings/tokens/new) with no scopes selected.
-
-</details>
-
-### Development Setup
-
-```bash
-git clone https://github.com/carlospalacin/spartan-ng-mcp.git
-cd spartan-ng-mcp
-npm install
-npm start        # or: npm run dev (auto-reload)
+```json
+{
+  "mcpServers": {
+    "spartan-ng": {
+      "command": "node",
+      "args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_your_token_here"
+      }
+    }
+  }
+}
 ```
 
-## Tools (17)
+#### VS Code (Copilot)
 
-### Components
+Add to `.vscode/mcp.json`:
 
-| Tool                              | Description                                                                                                                       |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `spartan_components_list`         | List all 57 components with URLs                                                                                                  |
-| `spartan_components_get`          | Get structured API data (Brain/Helm directives, inputs, outputs, examples). Uses the Spartan Analog API for perfect data quality. |
-| `spartan_components_source`       | Fetch actual TypeScript source code from GitHub (`libs/brain/` or `libs/helm/`)                                                   |
-| `spartan_components_dependencies` | Get the canonical dependency graph for any component                                                                              |
+```json
+{
+  "servers": {
+    "spartan-ng": {
+      "command": "node",
+      "args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_your_token_here"
+      }
+    }
+  }
+}
+```
 
-### Blocks
+> **Note:** The `GITHUB_TOKEN` is optional but recommended. Without it, GitHub API requests are limited to 60/hr. With a token (no scopes needed — public repo access only), the limit is 5000/hr. You can also pass `SPARTAN_CACHE_TTL_HOURS` and other config variables in the `env` block.
 
-| Tool                  | Description                                                                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `spartan_blocks_list` | List all building block categories and variants                                                                                                   |
-| `spartan_blocks_get`  | Fetch complete block source code from GitHub. Returns Angular component files with template, imports, and extracted Spartan/Angular dependencies. |
+## Tools
 
-### Search & Documentation
+### Discovery
 
-| Tool               | Description                                                                             |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| `spartan_search`   | Instant search across components by name, selector, directive, or input/output property |
-| `spartan_docs_get` | Fetch documentation topics (installation, theming, CLI, dark-mode, etc.)                |
-| `spartan_meta`     | Get full metadata for autocomplete (all components, blocks, and tool usage)             |
+| Tool | Description |
+|------|-------------|
+| `spartan_list` | List all components and blocks. Filter by type or block category. |
+| `spartan_search` | Fuzzy search across components, blocks, and docs. Ranked results with scores. |
+| `spartan_view` | Detailed component view: Brain directives, Helm components, inputs/outputs, examples, install snippets. |
+| `spartan_dependencies` | Component dependency graph with direct, transitive, and reverse dependencies. |
 
-### Health & Cache
+### Source Code
 
-| Tool                           | Description                                                         |
-| ------------------------------ | ------------------------------------------------------------------- |
-| `spartan_health_check`         | Check spartan.ng page availability                                  |
-| `spartan_health_instructions`  | Get Spartan CLI health check instructions                           |
-| `spartan_health_command`       | Build `ng`/`nx` health check commands                               |
-| `spartan_cache_status`         | View cache statistics                                               |
-| `spartan_cache_clear`          | Clear cached data                                                   |
-| `spartan_cache_rebuild`        | Rebuild cache (components, docs, and optionally blocks from GitHub) |
-| `spartan_cache_switch_version` | Switch Spartan UI version for caching                               |
-| `spartan_cache_list_versions`  | List all cached versions                                            |
+| Tool | Description |
+|------|-------------|
+| `spartan_source` | Fetch Brain/Helm TypeScript source code from GitHub. |
+| `spartan_block_source` | Fetch block source code with shared utilities and extracted imports. |
+
+### Documentation
+
+| Tool | Description |
+|------|-------------|
+| `spartan_docs` | Fetch documentation topics: installation, CLI, theming, dark-mode, typography, figma, changelog. |
+
+### Installation
+
+| Tool | Description |
+|------|-------------|
+| `spartan_install_command` | Generate `nx generate @spartan-ng/cli:ui` or `npm install` commands. Auto-detects package manager. |
+| `spartan_audit` | Post-installation checklist: Angular project, Tailwind, Spartan preset, Brain/Helm pairing, OnPush. |
+| `spartan_install_skills` | Install [spartan-ng-skills](https://github.com/jcpalaci/spartan-ng-skills) into a project's `.claude/skills/spartan/` directory. |
+
+### Project Context
+
+| Tool | Description |
+|------|-------------|
+| `spartan_project_info` | Detect Angular/Nx config, Tailwind version, installed packages, package manager, zoneless mode. |
+| `spartan_project_components` | List installed Brain/Helm packages with missing pair detection. |
+
+### Cache & Registry
+
+| Tool | Description |
+|------|-------------|
+| `spartan_cache` | Cache status, clear, or rebuild. Shows memory + file stats and GitHub rate limit. |
+| `spartan_registry_refresh` | Refresh registry from live Spartan Analog API. Reports added/updated/removed components. |
 
 ## Resources
 
-MCP resources provide read-only data via URI scheme:
+MCP resources provide direct data access via the `spartan://` URI scheme:
 
-- `spartan://components/list` — all components with metadata
-- `spartan://component/{name}/api` — Brain & Helm API specifications
-- `spartan://component/{name}/examples` — code examples
-- `spartan://component/{name}/full` — complete documentation with install snippets
-- `spartan://blocks/list` — all block categories and variants
+| URI | Description |
+|-----|-------------|
+| `spartan://components/list` | All components with Brain/Helm availability |
+| `spartan://blocks/list` | All blocks grouped by category |
+| `spartan://project/info` | Registry metadata |
+| `spartan://component/{name}/api` | Brain & Helm API specs for a component |
+| `spartan://component/{name}/examples` | Code examples for a component |
 
 ## Prompts
 
-Pre-built conversation templates:
+Pre-built workflow templates for common tasks:
 
-- `spartan-get-started` — get started with a component (brain or helm)
-- `spartan-compare-apis` — compare Brain API vs Helm API
-- `spartan-implement-feature` — implement a feature with a component
-- `spartan-troubleshoot` — troubleshoot component issues
-- `spartan-list-components` — list all components by category
-- `spartan-use-block` — use a building block in your project
-
-## Example Usage
-
-```jsonc
-// Get dialog API — returns 7 Brain + 10 Helm directives with full specs
-{ "tool": "spartan_components_get", "arguments": { "name": "dialog" } }
-
-// Get sidebar source code from GitHub
-{ "tool": "spartan_components_source", "arguments": { "name": "sidebar", "layer": "helm" } }
-
-// Get a login block with shared utilities
-{ "tool": "spartan_blocks_get", "arguments": { "category": "login", "variant": "login-simple-reactive-form", "includeShared": true } }
-
-// Search for date-related components
-{ "tool": "spartan_search", "arguments": { "query": "date" } }
-
-// Get sidebar dependencies (with transitive)
-{ "tool": "spartan_components_dependencies", "arguments": { "componentName": "sidebar", "includeTransitive": true } }
-```
+| Prompt | Description |
+|--------|-------------|
+| `spartan-get-started` | Installation + API overview + basic usage for any component |
+| `spartan-compare-layers` | Side-by-side Brain vs Helm API comparison |
+| `spartan-implement` | Step-by-step feature implementation guide |
+| `spartan-use-block` | Block integration guide with source fetching |
+| `spartan-migrate` | Version migration guide with Nx generators |
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    subgraph Client["MCP Client (IDE / AI Assistant)"]
-        direction LR
-        C1["Tool Calls"]
-        C2["Resources"]
-        C3["Prompts"]
-    end
-
-    subgraph Server["spartan-ng-mcp (stdio)"]
-        direction TB
-        Router["server.js — Router"]
-
-        subgraph Tools["Tool Modules"]
-            direction LR
-            T1["components.js"]
-            T2["blocks.js"]
-            T3["search.js"]
-            T4["docs.js"]
-            T5["analysis.js"]
-        end
-
-        subgraph Cache["Cache Layers"]
-            direction LR
-            MC["In-Memory\n(5min / 30min / 1hr)"]
-            FC["File-Based\n(24hr TTL)\ncache/{version}/"]
-        end
-    end
-
-    subgraph Sources["Data Sources"]
-        direction LR
-        API["Spartan Analog API\n1 request → 57 components\n(selectors, inputs, outputs,\nexamples, install snippets)"]
-        GH["GitHub API\nspartan-ng/spartan\n(block source, TS source,\ndependency graph)"]
-        WEB["spartan.ng Website\n(documentation pages,\nHTML content)"]
-    end
-
-    Client --> Router
-    Router --> Tools
-    Tools --> Cache
-    Cache --> Sources
-
-    style Client fill:#1a1a2e,stroke:#e94560,color:#eee
-    style Server fill:#16213e,stroke:#0f3460,color:#eee
-    style Sources fill:#0f3460,stroke:#533483,color:#eee
-    style API fill:#1a472a,stroke:#2d6a4f,color:#eee
-    style GH fill:#1a472a,stroke:#2d6a4f,color:#eee
-    style WEB fill:#1a472a,stroke:#2d6a4f,color:#eee
+```
+src/
+├── index.ts                  # Entry point — stdio transport
+├── server.ts                 # McpServer factory + tool registration
+├── tools/                    # 14 MCP tools (one file per group)
+│   ├── discovery.ts          # list, search, view, dependencies
+│   ├── source.ts             # component + block source
+│   ├── docs.ts               # documentation topics
+│   ├── install.ts            # CLI commands + audit
+│   ├── context.ts            # project detection
+│   ├── cache.ts              # cache + registry refresh
+│   ├── dependencies.ts       # dependency graph
+│   └── skills.ts             # skills installer
+├── data/                     # API clients
+│   ├── analog-api.ts         # Spartan Analog API (primary data source)
+│   ├── github.ts             # GitHub API (source code)
+│   └── types.ts              # Shared TypeScript types
+├── registry/                 # Hybrid component registry
+│   ├── registry.ts           # Loader + search + runtime refresh
+│   ├── schema.ts             # Zod validation schemas
+│   └── registry.json         # Static registry (56 components, 17 blocks)
+├── cache/                    # Multi-layer caching
+│   ├── memory-cache.ts       # LRU with TTL (5 min)
+│   ├── file-cache.ts         # Versioned file cache (24h)
+│   └── cache-manager.ts      # Orchestrator: memory → file → network
+├── project/                  # Project scanner
+│   ├── detector.ts           # Angular/Nx/Tailwind/zoneless detection
+│   └── types.ts              # SpartanProjectContext type
+├── search/fuzzy.ts           # fuzzysort wrapper
+├── errors/errors.ts          # SpartanError + 17 error codes
+├── resources/spartan.ts      # spartan:// URI handlers
+├── prompts/workflows.ts      # 5 workflow templates
+└── utils/                    # Pure utilities
+    ├── constants.ts           # URLs, timeouts, allowed hosts
+    ├── fetch.ts               # HTTP client with SSRF protection
+    ├── html.ts                # HTML parsing + extraction
+    └── imports.ts             # TypeScript import/export extraction
 ```
 
-### Request Flow
+### Data Resolution (3-tier)
 
 ```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────────┐
-│  AI asks:   │────▶│  MCP Tool:   │────▶│  Cache hit?  │────▶│  Return cached   │
-│  "How do I  │     │  components  │     │  Yes ───────▶│     │  structured JSON  │
-│  use the    │     │  _get        │     │  No ────┐    │     └──────────────────┘
-│  sidebar?"  │     │  name:sidebar│     └─────────┘    │
-└─────────────┘     └──────────────┘            │       │
-                                                ▼       │
-                                    ┌───────────────────┘
-                                    │  Fetch from source
-                                    ├─ extract=api  → Analog API (structured JSON)
-                                    ├─ extract=code → spartan.ng (HTML scraping)
-                                    └─ source tool  → GitHub API (TypeScript files)
+Discovery (list, search)    →  Static Registry (instant, offline)
+Details (view, examples)    →  Memory Cache → File Cache → Analog API
+Source code (source, block) →  Memory Cache → File Cache → GitHub API
 ```
 
-## Data Sources
+1. **Static Registry** (`registry.json`) — committed per release, zero latency
+2. **Analog API** — structured JSON from spartan.ng, cached 30min (memory) + 24h (file)
+3. **GitHub API** — TypeScript source code, cached 24h, rate-limited
 
-The server uses a hybrid approach for maximum data quality:
+### Spartan UI Concepts
 
-| Source                            | Used For                                       | Method                                     |
-| --------------------------------- | ---------------------------------------------- | ------------------------------------------ |
-| Spartan Analog API                | Component APIs, examples, install snippets     | Single JSON endpoint for all 57 components |
-| GitHub API (`spartan-ng/spartan`) | Block source code, component TypeScript source | Contents API with in-memory caching        |
-| spartan.ng website                | Documentation pages, HTML content              | HTTP fetch with file-based caching         |
-| Spartan CLI metadata              | Dependency graph (canonical)                   | Embedded from `primitive-deps.ts`          |
+Components have two API layers:
 
-## Caching
+- **Brain** — headless, logic-only primitives. Attribute selectors like `[brnDialogTrigger]`. Provides ARIA, keyboard handling, and focus management.
+- **Helm** — styled wrappers using `hostDirectives` to compose Brain. Mixed selectors: `[hlmBtn]`, `hlm-dialog-content`, `[hlmCard],hlm-card`. Uses CVA (Class Variance Authority) for variants and Tailwind for styling.
 
-Two layers:
+Some Helm components wrap `@angular/cdk` directly instead of Brain (DropdownMenu, ContextMenu, Menubar).
 
-1. **In-memory** — 5min for website content, 30min for Analog API, 1hr for GitHub API
-2. **File-based** — 24hr TTL under `cache/{version}/` with subdirectories for components, docs, blocks, and source
+**Blocks** are page-level building blocks — complete Angular components combining multiple Spartan components (sidebar layouts, login forms, calendar views).
 
-## Environment Variables
+## Skills
 
-| Variable                   | Default  | Description                                          |
-| -------------------------- | -------- | ---------------------------------------------------- |
-| `GITHUB_TOKEN`             | —        | GitHub PAT for higher rate limits (5000/hr vs 60/hr) |
-| `SPARTAN_CACHE_TTL_HOURS`  | `24`     | File cache TTL in hours                              |
-| `SPARTAN_CACHE_TTL_MS`     | `300000` | In-memory cache TTL in ms                            |
-| `SPARTAN_FETCH_TIMEOUT_MS` | `15000`  | HTTP request timeout in ms                           |
+This MCP server is designed to work alongside [spartan-ng-skills](https://github.com/jcpalaci/spartan-ng-skills) — Claude Code skills that teach AI assistants how to correctly compose Spartan components.
 
-## Testing
+**MCP** provides the knowledge: what components exist, their APIs, source code.
+**Skills** provide the wisdom: how to use them correctly, composition rules, styling conventions.
+
+Install skills into any project:
+
+```
+# Via MCP tool
+spartan_install_skills(cwd="/path/to/your-angular-project")
+
+# Or manually
+cp -r /path/to/spartan-ng-skills/.claude /path/to/your-angular-project/
+```
+
+The skills include 6 rule files with correct/incorrect Angular code pairs covering:
+- Brain vs Helm selection and `hostDirectives`
+- Component composition (Dialog, Card, Tabs, forms)
+- Styling with `hlm()`, `classes()`, CVA variants, semantic tokens
+- Angular Reactive Forms with HlmField system
+- Icon patterns with `ng-icon`
+- Angular directives: signals, `@if`/`@for`, `inject()`, OnPush
+
+## Configuration
+
+All settings are passed via the `env` block in your MCP configuration file (`.mcp.json`, `.cursor/mcp.json`, etc.):
+
+```json
+{
+  "mcpServers": {
+    "spartan-ng": {
+      "command": "node",
+      "args": ["/path/to/spartan-ng-mcp/dist/index.js"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_...",
+        "SPARTAN_CACHE_TTL_HOURS": "48"
+      }
+    }
+  }
+}
+```
+
+### Available Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `GITHUB_TOKEN` | — | GitHub PAT for 5000 req/hr (60/hr without). No scopes required. |
+| `SPARTAN_CACHE_TTL_HOURS` | `24` | File cache TTL in hours |
+| `SPARTAN_CACHE_TTL_MS` | `300000` | In-memory cache TTL in ms (5 min) |
+| `SPARTAN_FETCH_TIMEOUT_MS` | `15000` | HTTP fetch timeout in ms |
+
+### Updating the Registry
+
+When Spartan releases new components:
 
 ```bash
-node test-e2e.js    # 34 end-to-end tests via MCP client protocol
+# Regenerate from live Analog API
+npm run generate-registry
+
+# Rebuild
+npm run build
+```
+
+Or at runtime without rebuilding:
+
+```
+spartan_registry_refresh(force=true)
+```
+
+## Development
+
+```bash
+npm run dev          # TypeScript watch mode
+npm run typecheck    # Type-check without emitting
+npm run build        # Compile to dist/
+npm test             # Run tests
+npm run lint         # ESLint
 ```
 
 ## License
 
 MIT
-
----
-
-Built for the [Spartan Angular UI](https://www.spartan.ng) community.

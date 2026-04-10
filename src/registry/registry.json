@@ -1,0 +1,1448 @@
+{
+  "version": "2.0.0",
+  "generatedAt": "2026-04-10T20:40:04.075Z",
+  "spartanVersion": "latest",
+  "components": {
+    "accordion": {
+      "name": "accordion",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/accordion",
+      "helmPackage": "@spartan-ng/helm/accordion",
+      "brainDirectives": [
+        "BrnAccordionContent",
+        "BrnAccordionHeader",
+        "BrnAccordionItem",
+        "BrnAccordionTrigger",
+        "BrnAccordion"
+      ],
+      "helmComponents": [
+        "HlmAccordionContent",
+        "HlmAccordionItem",
+        "HlmAccordionTrigger",
+        "HlmAccordion"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/accordion"
+    },
+    "alert": {
+      "name": "alert",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/alert",
+      "helmPackage": "@spartan-ng/helm/alert",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmAlertAction",
+        "HlmAlertDescription",
+        "HlmAlertTitle",
+        "HlmAlert"
+      ],
+      "category": "feedback",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/alert"
+    },
+    "alert-dialog": {
+      "name": "alert-dialog",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/alert-dialog",
+      "helmPackage": "@spartan-ng/helm/alert-dialog",
+      "brainDirectives": [
+        "BrnAlertDialogContent",
+        "BrnAlertDialogDescription",
+        "BrnAlertDialogOverlay",
+        "BrnAlertDialogTitle",
+        "BrnAlertDialogTrigger",
+        "BrnAlertDialog"
+      ],
+      "helmComponents": [
+        "HlmAlertDialogAction",
+        "HlmAlertDialogCancel",
+        "HlmAlertDialogContent",
+        "HlmAlertDialogDescription",
+        "HlmAlertDialogFooter",
+        "HlmAlertDialogHeader",
+        "HlmAlertDialogOverlay",
+        "HlmAlertDialogPortal",
+        "HlmAlertDialogTitle",
+        "HlmAlertDialogTrigger",
+        "HlmAlertDialog"
+      ],
+      "category": "overlay",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/alert-dialog"
+    },
+    "aspect-ratio": {
+      "name": "aspect-ratio",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/aspect-ratio",
+      "helmPackage": "@spartan-ng/helm/aspect-ratio",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmAspectRatio"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/aspect-ratio"
+    },
+    "autocomplete": {
+      "name": "autocomplete",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/autocomplete",
+      "helmPackage": "@spartan-ng/helm/autocomplete",
+      "brainDirectives": [
+        "BrnAutocompleteAnchor",
+        "BrnAutocompleteClear",
+        "BrnAutocompleteContent",
+        "BrnAutocompleteEmpty",
+        "BrnAutocompleteGroup",
+        "BrnAutocompleteInputWrapper",
+        "BrnAutocompleteInput",
+        "BrnAutocompleteItem",
+        "BrnAutocompleteLabel",
+        "BrnAutocompleteList",
+        "BrnAutocompleteSearch",
+        "BrnAutocompleteSeparator",
+        "BrnAutocompleteStatus",
+        "BrnAutocomplete"
+      ],
+      "helmComponents": [
+        "HlmAutocompleteContent",
+        "HlmAutocompleteEmpty",
+        "HlmAutocompleteGroup",
+        "HlmAutocompleteInput",
+        "HlmAutocompleteItem",
+        "HlmAutocompleteLabel",
+        "HlmAutocompleteList",
+        "HlmAutocompletePortal",
+        "HlmAutocompleteSearch",
+        "HlmAutocompleteSeparator",
+        "HlmAutocompleteStatus",
+        "HlmAutocomplete"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/autocomplete"
+    },
+    "avatar": {
+      "name": "avatar",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/avatar",
+      "helmPackage": "@spartan-ng/helm/avatar",
+      "brainDirectives": [
+        "BrnAvatar",
+        "BrnAvatarFallback",
+        "BrnAvatarImage"
+      ],
+      "helmComponents": [
+        "HlmAvatarBadge",
+        "HlmAvatarFallback",
+        "HlmAvatarGroupCount",
+        "HlmAvatarGroup",
+        "HlmAvatarImage",
+        "HlmAvatar"
+      ],
+      "category": "data-display",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/avatar"
+    },
+    "badge": {
+      "name": "badge",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/badge",
+      "helmPackage": "@spartan-ng/helm/badge",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmBadge"
+      ],
+      "category": "data-display",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/badge"
+    },
+    "breadcrumb": {
+      "name": "breadcrumb",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/breadcrumb",
+      "helmPackage": "@spartan-ng/helm/breadcrumb",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmBreadcrumbEllipsis",
+        "HlmBreadcrumbItem",
+        "HlmBreadcrumbLink",
+        "HlmBreadcrumbList",
+        "HlmBreadcrumbPage",
+        "HlmBreadcrumbSeparator",
+        "HlmBreadcrumb"
+      ],
+      "category": "navigation",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/breadcrumb"
+    },
+    "button": {
+      "name": "button",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/button",
+      "helmPackage": "@spartan-ng/helm/button",
+      "brainDirectives": [
+        "BrnButton"
+      ],
+      "helmComponents": [
+        "HlmButton"
+      ],
+      "category": "action",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/button"
+    },
+    "button-group": {
+      "name": "button-group",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/button-group",
+      "helmPackage": "@spartan-ng/helm/button-group",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmButtonGroupSeparator",
+        "HlmButtonGroupText",
+        "HlmButtonGroup"
+      ],
+      "category": "action",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/button-group"
+    },
+    "calendar": {
+      "name": "calendar",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/calendar",
+      "helmPackage": "@spartan-ng/helm/calendar",
+      "brainDirectives": [
+        "BrnCalendarCellButton",
+        "BrnCalendarCell",
+        "BrnCalendarGrid",
+        "BrnCalendarHeader",
+        "BrnCalendarMonthSelect",
+        "BrnCalendarNextButton",
+        "BrnCalendarPreviousButton",
+        "BrnCalendarWeek",
+        "BrnCalendarWeekday",
+        "BrnCalendarYearSelect",
+        "BrnCalendar",
+        "BrnCalendarMulti",
+        "BrnCalendarRange"
+      ],
+      "helmComponents": [
+        "HlmCalendarMulti",
+        "HlmCalendarRange",
+        "HlmCalendar"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/calendar"
+    },
+    "card": {
+      "name": "card",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/card",
+      "helmPackage": "@spartan-ng/helm/card",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmCardAction",
+        "HlmCardContent",
+        "HlmCardDescription",
+        "HlmCardFooter",
+        "HlmCardHeader",
+        "HlmCardTitle",
+        "HlmCard"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/card"
+    },
+    "carousel": {
+      "name": "carousel",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/carousel",
+      "helmPackage": "@spartan-ng/helm/carousel",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmCarouselContent",
+        "HlmCarouselItem",
+        "HlmCarouselNext",
+        "HlmCarouselPrevious",
+        "HlmCarouselSlideDisplay",
+        "HlmCarousel"
+      ],
+      "category": "data-display",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/carousel"
+    },
+    "checkbox": {
+      "name": "checkbox",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/checkbox",
+      "helmPackage": "@spartan-ng/helm/checkbox",
+      "brainDirectives": [
+        "BrnCheckbox"
+      ],
+      "helmComponents": [
+        "HlmCheckbox"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/checkbox"
+    },
+    "collapsible": {
+      "name": "collapsible",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/collapsible",
+      "helmPackage": "@spartan-ng/helm/collapsible",
+      "brainDirectives": [
+        "BrnCollapsibleContent",
+        "BrnCollapsibleTrigger",
+        "BrnCollapsible"
+      ],
+      "helmComponents": [
+        "HlmCollapsibleContent",
+        "HlmCollapsibleTrigger",
+        "HlmCollapsible"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/collapsible"
+    },
+    "combobox": {
+      "name": "combobox",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/combobox",
+      "helmPackage": "@spartan-ng/helm/combobox",
+      "brainDirectives": [
+        "BrnComboboxAnchor",
+        "BrnComboboxChipInput",
+        "BrnComboboxChipRemove",
+        "BrnComboboxChip",
+        "BrnComboboxClear",
+        "BrnComboboxContent",
+        "BrnComboboxEmpty",
+        "BrnComboboxGroup",
+        "BrnComboboxInputWrapper",
+        "BrnComboboxInput",
+        "BrnComboboxItem",
+        "BrnComboboxLabel",
+        "BrnComboboxList",
+        "BrnComboboxMultiple",
+        "BrnComboboxPlaceholder",
+        "BrnComboboxPopoverTrigger",
+        "BrnComboboxSeparator",
+        "BrnComboboxStatus",
+        "BrnComboboxTrigger",
+        "BrnComboboxValueTemplate",
+        "BrnComboboxValue",
+        "BrnComboboxValues",
+        "BrnCombobox"
+      ],
+      "helmComponents": [
+        "HlmComboboxChipInput",
+        "HlmComboboxChipRemove",
+        "HlmComboboxChip",
+        "HlmComboboxChips",
+        "HlmComboboxContent",
+        "HlmComboboxEmpty",
+        "HlmComboboxGroup",
+        "HlmComboboxInput",
+        "HlmComboboxItem",
+        "HlmComboboxLabel",
+        "HlmComboboxList",
+        "HlmComboboxMultiple",
+        "HlmComboboxPlaceholder",
+        "HlmComboboxPortal",
+        "HlmComboboxSeparator",
+        "HlmComboboxStatus",
+        "HlmComboboxTrigger",
+        "HlmComboboxValueTemplate",
+        "HlmComboboxValue",
+        "HlmComboboxValues",
+        "HlmCombobox"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/combobox"
+    },
+    "command": {
+      "name": "command",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/command",
+      "helmPackage": "@spartan-ng/helm/command",
+      "brainDirectives": [
+        "BrnCommandEmpty",
+        "BrnCommandGroup",
+        "BrnCommandInput",
+        "BrnCommandItem",
+        "BrnCommandList",
+        "BrnCommandSeparator",
+        "BrnCommand"
+      ],
+      "helmComponents": [
+        "HlmCommandDialog",
+        "HlmCommandEmptyState",
+        "HlmCommandEmpty",
+        "HlmCommandGroupLabel",
+        "HlmCommandGroup",
+        "HlmCommandInput",
+        "HlmCommandItem",
+        "HlmCommandList",
+        "HlmCommandSeparator",
+        "HlmCommandShortcut",
+        "HlmCommand"
+      ],
+      "category": "menu",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/command"
+    },
+    "context-menu": {
+      "name": "context-menu",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/context-menu",
+      "helmPackage": "@spartan-ng/helm/context-menu",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmContextMenuTrigger"
+      ],
+      "category": "menu",
+      "peerDependencies": [
+        "@angular/cdk",
+        "@angular/cdk/menu"
+      ],
+      "url": "https://www.spartan.ng/components/context-menu"
+    },
+    "date-picker": {
+      "name": "date-picker",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/date-picker",
+      "helmPackage": "@spartan-ng/helm/date-picker",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmDatePickerMulti",
+        "HlmDatePicker",
+        "HlmDateRangePicker"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/date-picker"
+    },
+    "dialog": {
+      "name": "dialog",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/dialog",
+      "helmPackage": "@spartan-ng/helm/dialog",
+      "brainDirectives": [
+        "BrnDialogClose",
+        "BrnDialogContent",
+        "BrnDialogDescription",
+        "BrnDialogOverlay",
+        "BrnDialogTitle",
+        "BrnDialogTrigger",
+        "BrnDialog"
+      ],
+      "helmComponents": [
+        "HlmDialogClose",
+        "HlmDialogContent",
+        "HlmDialogDescription",
+        "HlmDialogFooter",
+        "HlmDialogHeader",
+        "HlmDialogOverlay",
+        "HlmDialogPortal",
+        "HlmDialogTitle",
+        "HlmDialogTrigger",
+        "HlmDialog"
+      ],
+      "category": "overlay",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/dialog"
+    },
+    "dropdown-menu": {
+      "name": "dropdown-menu",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/dropdown-menu",
+      "helmPackage": "@spartan-ng/helm/dropdown-menu",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmDropdownMenuCheckboxIndicator",
+        "HlmDropdownMenuCheckbox",
+        "HlmDropdownMenuGroup",
+        "HlmDropdownMenuItemSubIndicator",
+        "HlmDropdownMenuItem",
+        "HlmDropdownMenuLabel",
+        "HlmDropdownMenuRadioIndicator",
+        "HlmDropdownMenuRadio",
+        "HlmDropdownMenuSeparator",
+        "HlmDropdownMenuShortcut",
+        "HlmDropdownMenuSub",
+        "HlmDropdownMenuTrigger",
+        "HlmDropdownMenu"
+      ],
+      "category": "menu",
+      "peerDependencies": [
+        "@angular/cdk",
+        "@angular/cdk/menu"
+      ],
+      "url": "https://www.spartan.ng/components/dropdown-menu"
+    },
+    "empty": {
+      "name": "empty",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/empty",
+      "helmPackage": "@spartan-ng/helm/empty",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmEmptyContent",
+        "HlmEmptyDescription",
+        "HlmEmptyHeader",
+        "HlmEmptyMedia",
+        "HlmEmptyTitle",
+        "HlmEmpty"
+      ],
+      "category": "feedback",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/empty"
+    },
+    "field": {
+      "name": "field",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/field",
+      "helmPackage": "@spartan-ng/helm/field",
+      "brainDirectives": [
+        "BrnFieldControlDescribedBy",
+        "BrnField"
+      ],
+      "helmComponents": [
+        "HlmFieldContent",
+        "HlmFieldDescription",
+        "HlmFieldError",
+        "HlmFieldGroup",
+        "HlmFieldLabel",
+        "HlmFieldLegend",
+        "HlmFieldSeparator",
+        "HlmFieldSet",
+        "HlmFieldTitle",
+        "HlmField"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/field"
+    },
+    "hover-card": {
+      "name": "hover-card",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/hover-card",
+      "helmPackage": "@spartan-ng/helm/hover-card",
+      "brainDirectives": [
+        "BrnHoverCardContent",
+        "BrnHoverCardTrigger",
+        "BrnHoverCard"
+      ],
+      "helmComponents": [
+        "HlmHoverCardContent",
+        "HlmHoverCardPortal",
+        "HlmHoverCardTrigger",
+        "HlmHoverCard"
+      ],
+      "category": "overlay",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/hover-card"
+    },
+    "icon": {
+      "name": "icon",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/icon",
+      "helmPackage": "@spartan-ng/helm/icon",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmIcon"
+      ],
+      "category": "typography",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/icon"
+    },
+    "input": {
+      "name": "input",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/input",
+      "helmPackage": "@spartan-ng/helm/input",
+      "brainDirectives": [
+        "BrnInput"
+      ],
+      "helmComponents": [
+        "HlmInput"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/input"
+    },
+    "input-group": {
+      "name": "input-group",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/input-group",
+      "helmPackage": "@spartan-ng/helm/input-group",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmInputGroupAddon",
+        "HlmInputGroupButton",
+        "HlmInputGroupInput",
+        "HlmInputGroupText",
+        "HlmInputGroupTextarea",
+        "HlmInputGroup"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/input-group"
+    },
+    "input-otp": {
+      "name": "input-otp",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/input-otp",
+      "helmPackage": "@spartan-ng/helm/input-otp",
+      "brainDirectives": [
+        "BrnInputOtpSlot",
+        "BrnInputOtp"
+      ],
+      "helmComponents": [
+        "HlmInputOtpFakeCaret",
+        "HlmInputOtpGroup",
+        "HlmInputOtpSeparator",
+        "HlmInputOtpSlot",
+        "HlmInputOtp"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/input-otp"
+    },
+    "item": {
+      "name": "item",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/item",
+      "helmPackage": "@spartan-ng/helm/item",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmItemActions",
+        "HlmItemContent",
+        "HlmItemDescription",
+        "HlmItemFooter",
+        "HlmItemGroup",
+        "HlmItemHeader",
+        "HlmItemMedia",
+        "HlmItemSeparator",
+        "HlmItemTitle",
+        "HlmItem"
+      ],
+      "category": "data-display",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/item"
+    },
+    "kbd": {
+      "name": "kbd",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/kbd",
+      "helmPackage": "@spartan-ng/helm/kbd",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmKbdGroup",
+        "HlmKbd"
+      ],
+      "category": "typography",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/kbd"
+    },
+    "label": {
+      "name": "label",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/label",
+      "helmPackage": "@spartan-ng/helm/label",
+      "brainDirectives": [
+        "BrnLabel"
+      ],
+      "helmComponents": [
+        "HlmLabel"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/label"
+    },
+    "menubar": {
+      "name": "menubar",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/menubar",
+      "helmPackage": "@spartan-ng/helm/menubar",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmMenubarTrigger",
+        "HlmMenubar"
+      ],
+      "category": "menu",
+      "peerDependencies": [
+        "@angular/cdk",
+        "@angular/cdk/menu"
+      ],
+      "url": "https://www.spartan.ng/components/menubar"
+    },
+    "native-select": {
+      "name": "native-select",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/native-select",
+      "helmPackage": "@spartan-ng/helm/native-select",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmNativeSelectOptGroup",
+        "HlmNativeSelectOption",
+        "HlmNativeSelect"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/native-select"
+    },
+    "navigation-menu": {
+      "name": "navigation-menu",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/navigation-menu",
+      "helmPackage": "@spartan-ng/helm/navigation-menu",
+      "brainDirectives": [
+        "BrnNavigationMenuContent",
+        "BrnNavigationMenuItem",
+        "BrnNavigationMenuLink",
+        "BrnNavigationMenuList",
+        "BrnNavigationMenuTrigger",
+        "BrnNavigationMenu"
+      ],
+      "helmComponents": [
+        "HlmNavigationMenuContent",
+        "HlmNavigationMenuItem",
+        "HlmNavigationMenuLink",
+        "HlmNavigationMenuList",
+        "HlmNavigationMenuPortal",
+        "HlmNavigationMenuTrigger",
+        "HlmNavigationMenu"
+      ],
+      "category": "navigation",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/navigation-menu"
+    },
+    "pagination": {
+      "name": "pagination",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/pagination",
+      "helmPackage": "@spartan-ng/helm/pagination",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmNumberedPaginationQueryParams",
+        "HlmNumberedPagination",
+        "HlmPaginationContent",
+        "HlmPaginationEllipsis",
+        "HlmPaginationItem",
+        "HlmPaginationLink",
+        "HlmPaginationNext",
+        "HlmPaginationPrevious",
+        "HlmPagination"
+      ],
+      "category": "navigation",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/pagination"
+    },
+    "popover": {
+      "name": "popover",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/popover",
+      "helmPackage": "@spartan-ng/helm/popover",
+      "brainDirectives": [
+        "BrnPopoverContent",
+        "BrnPopoverTrigger",
+        "BrnPopover"
+      ],
+      "helmComponents": [
+        "HlmPopoverContent",
+        "HlmPopoverPortal",
+        "HlmPopoverTrigger",
+        "HlmPopover"
+      ],
+      "category": "overlay",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/popover"
+    },
+    "progress": {
+      "name": "progress",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/progress",
+      "helmPackage": "@spartan-ng/helm/progress",
+      "brainDirectives": [
+        "BrnProgressIndicator",
+        "BrnProgress"
+      ],
+      "helmComponents": [
+        "HlmProgressIndicator",
+        "HlmProgress"
+      ],
+      "category": "feedback",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/progress"
+    },
+    "radio-group": {
+      "name": "radio-group",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/radio-group",
+      "helmPackage": "@spartan-ng/helm/radio-group",
+      "brainDirectives": [
+        "BrnRadioGroup",
+        "BrnRadio"
+      ],
+      "helmComponents": [
+        "HlmRadioGroup",
+        "HlmRadioIndicator",
+        "HlmRadio"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/radio-group"
+    },
+    "resizable": {
+      "name": "resizable",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/resizable",
+      "helmPackage": "@spartan-ng/helm/resizable",
+      "brainDirectives": [
+        "BrnResizableGroup",
+        "BrnResizableHandle",
+        "BrnResizablePanel"
+      ],
+      "helmComponents": [
+        "HlmResizableGroup",
+        "HlmResizableHandle",
+        "HlmResizablePanel"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/resizable"
+    },
+    "scroll-area": {
+      "name": "scroll-area",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/scroll-area",
+      "helmPackage": "@spartan-ng/helm/scroll-area",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmScrollArea"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/scroll-area"
+    },
+    "select": {
+      "name": "select",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/select",
+      "helmPackage": "@spartan-ng/helm/select",
+      "brainDirectives": [
+        "BrnSelectContent",
+        "BrnSelectGroup",
+        "BrnSelectItem",
+        "BrnSelectLabel",
+        "BrnSelectList",
+        "BrnSelectMultiple",
+        "BrnSelectPlaceholder",
+        "BrnSelectScrollDown",
+        "BrnSelectScrollUp",
+        "BrnSelectSeparator",
+        "BrnSelectTriggerWrapper",
+        "BrnSelectTrigger",
+        "BrnSelectValueTemplate",
+        "BrnSelectValue",
+        "BrnSelectValues",
+        "BrnSelect"
+      ],
+      "helmComponents": [
+        "HlmSelectContent",
+        "HlmSelectGroup",
+        "HlmSelectItem",
+        "HlmSelectLabel",
+        "HlmSelectMultiple",
+        "HlmSelectPlaceholder",
+        "HlmSelectPortal",
+        "HlmSelectScrollDown",
+        "HlmSelectScrollUp",
+        "HlmSelectSeparator",
+        "HlmSelectTrigger",
+        "HlmSelectValueTemplate",
+        "HlmSelectValue",
+        "HlmSelectValuesContent",
+        "HlmSelectValues",
+        "HlmSelect"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/select"
+    },
+    "separator": {
+      "name": "separator",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/separator",
+      "helmPackage": "@spartan-ng/helm/separator",
+      "brainDirectives": [
+        "BrnSeparator"
+      ],
+      "helmComponents": [
+        "HlmSeparator"
+      ],
+      "category": "layout",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/separator"
+    },
+    "sheet": {
+      "name": "sheet",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/sheet",
+      "helmPackage": "@spartan-ng/helm/sheet",
+      "brainDirectives": [
+        "BrnSheetClose",
+        "BrnSheetContent",
+        "BrnSheetDescription",
+        "BrnSheetOverlay",
+        "BrnSheetTitle",
+        "BrnSheetTrigger",
+        "BrnSheet"
+      ],
+      "helmComponents": [
+        "HlmSheetClose",
+        "HlmSheetContent",
+        "HlmSheetDescription",
+        "HlmSheetFooter",
+        "HlmSheetHeader",
+        "HlmSheetOverlay",
+        "HlmSheetPortal",
+        "HlmSheetTitle",
+        "HlmSheetTrigger",
+        "HlmSheet"
+      ],
+      "category": "overlay",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/sheet"
+    },
+    "sidebar": {
+      "name": "sidebar",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/sidebar",
+      "helmPackage": "@spartan-ng/helm/sidebar",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmSidebarContent",
+        "HlmSidebarFooter",
+        "HlmSidebarGroupAction",
+        "HlmSidebarGroupContent",
+        "HlmSidebarGroupLabel",
+        "HlmSidebarGroup",
+        "HlmSidebarHeader",
+        "HlmSidebarInput",
+        "HlmSidebarInset",
+        "HlmSidebarMenuAction",
+        "HlmSidebarMenuBadge",
+        "HlmSidebarMenuButton",
+        "HlmSidebarMenuItem",
+        "HlmSidebarMenuSkeleton",
+        "HlmSidebarMenuSubButton",
+        "HlmSidebarMenuSubItem",
+        "HlmSidebarMenuSub",
+        "HlmSidebarMenu",
+        "HlmSidebarRail",
+        "HlmSidebarSeparator",
+        "HlmSidebarTrigger",
+        "HlmSidebarWrapper",
+        "HlmSidebar"
+      ],
+      "category": "navigation",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/sidebar"
+    },
+    "skeleton": {
+      "name": "skeleton",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/skeleton",
+      "helmPackage": "@spartan-ng/helm/skeleton",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmSkeleton"
+      ],
+      "category": "feedback",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/skeleton"
+    },
+    "slider": {
+      "name": "slider",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/slider",
+      "helmPackage": "@spartan-ng/helm/slider",
+      "brainDirectives": [
+        "BrnSliderRange",
+        "BrnSliderThumb",
+        "BrnSliderTick",
+        "BrnSliderTrack",
+        "BrnSlider"
+      ],
+      "helmComponents": [
+        "HlmSlider"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/slider"
+    },
+    "sonner": {
+      "name": "sonner",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/sonner",
+      "helmPackage": "@spartan-ng/helm/sonner",
+      "brainDirectives": [
+        "BrnSonnerIcon",
+        "BrnSonnerLoader",
+        "BrnSonnerToast",
+        "BrnSonnerToaster"
+      ],
+      "helmComponents": [
+        "HlmToaster"
+      ],
+      "category": "feedback",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/sonner"
+    },
+    "spinner": {
+      "name": "spinner",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/spinner",
+      "helmPackage": "@spartan-ng/helm/spinner",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmSpinner"
+      ],
+      "category": "feedback",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/spinner"
+    },
+    "switch": {
+      "name": "switch",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/switch",
+      "helmPackage": "@spartan-ng/helm/switch",
+      "brainDirectives": [
+        "BrnSwitchThumb",
+        "BrnSwitch"
+      ],
+      "helmComponents": [
+        "HlmSwitchThumb",
+        "HlmSwitch"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/switch"
+    },
+    "table": {
+      "name": "table",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/table",
+      "helmPackage": "@spartan-ng/helm/table",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmTableContainer",
+        "HlmTable",
+        "HlmTHead",
+        "HlmTBody",
+        "HlmTFoot",
+        "HlmTr",
+        "HlmTh",
+        "HlmTd",
+        "HlmCaption"
+      ],
+      "category": "data-display",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/table"
+    },
+    "tabs": {
+      "name": "tabs",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/tabs",
+      "helmPackage": "@spartan-ng/helm/tabs",
+      "brainDirectives": [
+        "BrnTabsContentLazy",
+        "BrnTabsContent",
+        "BrnTabsList",
+        "BrnTabsPaginatedList",
+        "BrnTabsTrigger",
+        "BrnTabs"
+      ],
+      "helmComponents": [
+        "HlmTabsContentLazy",
+        "HlmTabsContent",
+        "HlmTabsList",
+        "HlmTabsPaginatedList",
+        "HlmTabsTrigger",
+        "HlmTabs"
+      ],
+      "category": "navigation",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/tabs"
+    },
+    "textarea": {
+      "name": "textarea",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/textarea",
+      "helmPackage": "@spartan-ng/helm/textarea",
+      "brainDirectives": [
+        "BrnTextarea"
+      ],
+      "helmComponents": [
+        "HlmTextarea"
+      ],
+      "category": "form",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/textarea"
+    },
+    "toggle": {
+      "name": "toggle",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/toggle",
+      "helmPackage": "@spartan-ng/helm/toggle",
+      "brainDirectives": [
+        "BrnToggle"
+      ],
+      "helmComponents": [
+        "HlmToggle"
+      ],
+      "category": "action",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/toggle"
+    },
+    "toggle-group": {
+      "name": "toggle-group",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/toggle-group",
+      "helmPackage": "@spartan-ng/helm/toggle-group",
+      "brainDirectives": [
+        "BrnToggleGroup",
+        "BrnToggleGroupItem"
+      ],
+      "helmComponents": [
+        "HlmToggleGroupItem",
+        "HlmToggleGroup"
+      ],
+      "category": "action",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/toggle-group"
+    },
+    "tooltip": {
+      "name": "tooltip",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/tooltip",
+      "helmPackage": "@spartan-ng/helm/tooltip",
+      "brainDirectives": [
+        "BrnTooltipContent",
+        "BrnTooltipStringTemplateOutlet",
+        "BrnTooltip"
+      ],
+      "helmComponents": [
+        "HlmTooltip"
+      ],
+      "category": "overlay",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/tooltip"
+    },
+    "typography": {
+      "name": "typography",
+      "brainAvailable": false,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/typography",
+      "helmPackage": "@spartan-ng/helm/typography",
+      "brainDirectives": [],
+      "helmComponents": [
+        "HlmBlockquote",
+        "HlmCode",
+        "HlmH1",
+        "HlmH2",
+        "HlmH3",
+        "HlmH4",
+        "HlmLarge",
+        "HlmLead",
+        "HlmMuted",
+        "HlmP",
+        "HlmSmall",
+        "HlmUl"
+      ],
+      "category": "typography",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/typography"
+    }
+  },
+  "blocks": {
+    "sidebar/sidebar-sticky-header": {
+      "category": "sidebar",
+      "variant": "sidebar-sticky-header",
+      "githubPath": "apps/app/src/app/pages/(blocks-preview)/blocks-preview/sidebar-sticky-header",
+      "spartanImports": []
+    },
+    "sidebar/sidebar-inset": {
+      "category": "sidebar",
+      "variant": "sidebar-inset",
+      "githubPath": "apps/app/src/app/pages/(blocks-preview)/blocks-preview/sidebar-inset",
+      "spartanImports": []
+    },
+    "login/login-simple-reactive-form": {
+      "category": "login",
+      "variant": "login-simple-reactive-form",
+      "githubPath": "apps/app/src/app/pages/(blocks-preview)/blocks-preview/login-simple-reactive-form",
+      "spartanImports": []
+    },
+    "login/login-two-column-reactive-form": {
+      "category": "login",
+      "variant": "login-two-column-reactive-form",
+      "githubPath": "apps/app/src/app/pages/(blocks-preview)/blocks-preview/login-two-column-reactive-form",
+      "spartanImports": []
+    },
+    "signup/signup-simple-reactive-form": {
+      "category": "signup",
+      "variant": "signup-simple-reactive-form",
+      "githubPath": "apps/app/src/app/pages/(blocks-preview)/blocks-preview/signup-simple-reactive-form",
+      "spartanImports": []
+    },
+    "signup/signup-two-column-reactive-form": {
+      "category": "signup",
+      "variant": "signup-two-column-reactive-form",
+      "githubPath": "apps/app/src/app/pages/(blocks-preview)/blocks-preview/signup-two-column-reactive-form",
+      "spartanImports": []
+    },
+    "calendar/calendar-simple": {
+      "category": "calendar",
+      "variant": "calendar-simple",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-simple",
+      "spartanImports": []
+    },
+    "calendar/calendar-multi": {
+      "category": "calendar",
+      "variant": "calendar-multi",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-multi",
+      "spartanImports": []
+    },
+    "calendar/calendar-date-picker": {
+      "category": "calendar",
+      "variant": "calendar-date-picker",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-date-picker",
+      "spartanImports": []
+    },
+    "calendar/calendar-date-picker-with-button": {
+      "category": "calendar",
+      "variant": "calendar-date-picker-with-button",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-date-picker-with-button",
+      "spartanImports": []
+    },
+    "calendar/calendar-date-picker-multi": {
+      "category": "calendar",
+      "variant": "calendar-date-picker-multi",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-date-picker-multi",
+      "spartanImports": []
+    },
+    "calendar/calendar-date-picker-range": {
+      "category": "calendar",
+      "variant": "calendar-date-picker-range",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-date-picker-range",
+      "spartanImports": []
+    },
+    "calendar/calendar-disabled-days": {
+      "category": "calendar",
+      "variant": "calendar-disabled-days",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-disabled-days",
+      "spartanImports": []
+    },
+    "calendar/calendar-disabled-weekends": {
+      "category": "calendar",
+      "variant": "calendar-disabled-weekends",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-disabled-weekends",
+      "spartanImports": []
+    },
+    "calendar/calendar-date-time-picker": {
+      "category": "calendar",
+      "variant": "calendar-date-time-picker",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-date-time-picker",
+      "spartanImports": []
+    },
+    "calendar/calendar-month-year-dropdown": {
+      "category": "calendar",
+      "variant": "calendar-month-year-dropdown",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-month-year-dropdown",
+      "spartanImports": []
+    },
+    "calendar/calendar-localized": {
+      "category": "calendar",
+      "variant": "calendar-localized",
+      "githubPath": "apps/app/src/app/pages/(blocks)/blocks/calendar/calendar-localized",
+      "spartanImports": []
+    }
+  },
+  "docs": [
+    "installation",
+    "cli",
+    "theming",
+    "dark-mode",
+    "typography",
+    "figma",
+    "changelog"
+  ]
+}

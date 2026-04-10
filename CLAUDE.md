@@ -1,86 +1,83 @@
 ## What This Is
 
-An MCP (Model Context Protocol) server that exposes the Spartan Angular UI ecosystem as tools for IDEs and AI assistants. It provides component APIs, documentation, source code from GitHub, and page-level building blocks from spartan.ng.
+An MCP (Model Context Protocol) server that exposes the Spartan Angular UI ecosystem as tools for IDEs and AI assistants. It provides component discovery, Brain/Helm APIs, source code from GitHub, installation commands, project context detection, and page-level building blocks.
 
 ## Commands
 
 - `npm start` — start the MCP server (stdio transport)
-- `npm run dev` — start with `--watch` for auto-reload
-- `npm test` — placeholder (currently exits 0)
-- `node test-e2e.js` — run end-to-end tests (no test framework; each test file is standalone)
-- Individual tests: `node test-cache.js`, `node test-server.js`, `node test-prompts.js`, etc.
+- `npm run dev` — start TypeScript compiler in watch mode
+- `npm run build` — compile TypeScript to `dist/`
+- `npm run generate-registry` — regenerate `registry.json` from live Spartan Analog API
+- `npm test` — run tests (vitest)
+- `npm run typecheck` — type-check without emitting
 
 ## Architecture
 
-**ES Modules throughout** (`"type": "module"` in package.json). Pure JavaScript with `@ts-check` + JSDoc, no build step.
+**TypeScript throughout** (`"type": "module"`, strict mode). ES2022 target, NodeNext modules.
 
 ### Entry Point
 
-`server.js` — creates an `McpServer` instance, registers tool/resource/prompt modules, connects via `StdioServerTransport`.
+`src/index.ts` — creates `McpServer`, initializes services (registry, cache, API clients), registers all tool/resource/prompt modules, connects via `StdioServerTransport`.
 
-### Tool Modules (tools/)
+### Tool Modules (src/tools/)
 
-Each file exports a `register*Tools(server)` function called from `server.js`:
+Each file exports a `create*Tools()` function returning `ToolDefinition[]`:
 
-| Module            | Purpose                                                                                         |
-| ----------------- | ----------------------------------------------------------------------------------------------- |
-| `components.js`   | `spartan_components_list` / `spartan_components_get` / `spartan_components_source` — component data |
-| `blocks.js`       | `spartan_blocks_list` / `spartan_blocks_get` — page-level building blocks from GitHub             |
-| `docs.js`         | `spartan_docs_get` — fetch documentation topics                                                  |
-| `health.js`       | Health checks and CLI command builders                                                           |
-| `meta.js`         | Metadata for autocomplete (components + blocks)                                                  |
-| `search.js`       | Full-text search across components and docs                                                      |
-| `analysis.js`     | Component dependency analysis, accessibility checks                                              |
-| `github.js`       | GitHub API client — fetch source code from spartan-ng/spartan repo                               |
-| `cache.js`        | `CacheManager` class — version-aware file cache with 24h TTL                                     |
-| `cache-tools.js`  | MCP tools for cache status/clear/rebuild/version-switch                                          |
-| `cache-warmup.js` | Pre-populate cache for components, docs, and blocks                                              |
-| `resources.js`    | MCP resource handlers (`spartan://component/{name}/*`, `spartan://blocks/*`)                     |
-| `prompts.js`      | MCP prompt handlers (6 prompts including `spartan-use-block`)                                    |
-| `utils.js`        | Core utilities: `fetchContent`, HTML extraction, `KNOWN_COMPONENTS`, `KNOWN_BLOCKS`              |
+| Module | Tools | Purpose |
+|--------|-------|---------|
+| `discovery.ts` | `spartan_list` / `spartan_search` / `spartan_view` / `spartan_dependencies` | Component discovery, fuzzy search, detailed API view |
+| `source.ts` | `spartan_source` / `spartan_block_source` | TypeScript source from GitHub |
+| `docs.ts` | `spartan_docs` | Documentation topics from spartan.ng |
+| `install.ts` | `spartan_install_command` / `spartan_audit` | CLI command generation, post-install checklist |
+| `context.ts` | `spartan_project_info` / `spartan_project_components` | Angular/Nx project detection |
+| `cache.ts` | `spartan_cache` / `spartan_registry_refresh` | Cache management, runtime registry refresh |
 
-### Data Sources (Hybrid)
+### Data Sources (3-tier priority)
 
-- **spartan.ng website** — component docs, API tables, examples, documentation pages
-- **GitHub (spartan-ng/spartan)** — component TypeScript source code, block source code, shared utilities
+1. **Static Registry** (`src/registry/registry.json`) — committed per release, zero latency, works offline
+2. **Analog API** (`spartan.ng/api/_analog/...`) — runtime fetch with 30min + 24h cache layers
+3. **GitHub API** (`api.github.com`) — source code only, rate-limited (60/hr or 5000/hr with token)
 
-### Caching
+### Key Modules
 
-Two layers:
-
-1. **In-memory** — 5-minute TTL on fetched HTTP content (in `utils.js`), 1-hour TTL on GitHub API responses (in `github.js`)
-2. **File-based** — 24-hour TTL under `cache/{version}/` with subdirectories: `components/`, `docs/`, `blocks/`, `source/`. Configurable via `SPARTAN_CACHE_TTL_HOURS` env var.
-
-### Data Flow
-
-- **Components**: MCP client → tool call → Zod validation → fetch from spartan.ng (cached) → extract API/code/headings → return JSON
-- **Blocks**: MCP client → tool call → Zod validation → fetch from GitHub API (cached) → return source files + extracted imports
-- **Source**: MCP client → tool call → Zod validation → fetch from GitHub API (cached) → return TypeScript files
+| Module | Purpose |
+|--------|---------|
+| `registry/registry.ts` | RegistryLoader — loads static JSON, provides lookup/search, supports runtime refresh |
+| `registry/schema.ts` | Zod schemas for registry validation |
+| `data/analog-api.ts` | Spartan Analog API client — bulk fetch for all component data |
+| `data/github.ts` | GitHub API client — file/directory fetching with rate limit tracking |
+| `cache/memory-cache.ts` | Generic LRU cache with TTL |
+| `cache/file-cache.ts` | Versioned file cache with path traversal protection |
+| `cache/cache-manager.ts` | Orchestrator: memory → file → network |
+| `project/detector.ts` | Angular/Nx/Tailwind/zoneless project scanner |
+| `search/fuzzy.ts` | fuzzysort wrapper for component search |
+| `errors/errors.ts` | SpartanError hierarchy with 17 error codes |
+| `resources/spartan.ts` | MCP resource handlers (spartan:// URI scheme) |
+| `prompts/workflows.ts` | MCP prompt handlers (5 workflow templates) |
 
 ### Spartan UI Concepts
 
 Components have two API layers:
 
-- **Brain API** — headless, logic-only primitives (e.g., `BrnDialogTriggerDirective`)
-- **Helm API** — styled wrappers around Brain components (e.g., `HlmDialogComponent`)
+- **Brain** — headless, logic-only primitives (e.g., `BrnDialogTriggerDirective`). Attribute selectors like `[brnDialogTrigger]`.
+- **Helm** — styled wrappers using `hostDirectives` to compose Brain (e.g., `HlmButtonDirective`). Mixed selectors: `[hlmBtn]`, `hlm-dialog-content`, `[hlmCard],hlm-card`.
 
-**Blocks** are page-level building blocks — complete Angular components combining multiple Spartan UI components (sidebar layouts, login/signup forms, calendar interfaces).
+Some Helm components wrap `@angular/cdk` directly instead of Brain (DropdownMenu, ContextMenu, Menubar).
 
-## Key Constants
-
-- `SPARTAN_DOCS_BASE` = `https://www.spartan.ng/documentation`
-- `SPARTAN_COMPONENTS_BASE` = `https://www.spartan.ng/components`
-- `KNOWN_COMPONENTS` — array of 57 component names (in `utils.js`)
-- `KNOWN_BLOCKS` — object with 4 categories, 17 total block variants (in `utils.js`)
-- `SPARTAN_REPO` = `spartan-ng/spartan` (in `github.js`)
+**Blocks** are page-level building blocks — complete Angular components combining multiple Spartan UI components.
 
 ## Environment Variables
 
-- `GITHUB_TOKEN` — GitHub PAT for higher rate limits (5000/hr vs 60/hr). No scopes needed for public repos.
+- `GITHUB_TOKEN` — GitHub PAT for 5000 req/hr (default: 60/hr unauthenticated)
 - `SPARTAN_CACHE_TTL_HOURS` — File cache TTL in hours (default: 24)
 - `SPARTAN_CACHE_TTL_MS` — In-memory cache TTL in ms (default: 300000)
 - `SPARTAN_FETCH_TIMEOUT_MS` — HTTP timeout in ms (default: 15000)
 
-<!-- SKILLS-INDEX-START -->
-[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/conventional-commits:{SKILL.md}
-<!-- SKILLS-INDEX-END -->
+## Adding New Components
+
+When Spartan releases new components:
+1. Run `npm run generate-registry` to fetch from the live Analog API
+2. The registry.json is updated automatically
+3. Rebuild with `npm run build`
+
+Users can also call `spartan_registry_refresh` at runtime to pick up new components without updating the MCP.
