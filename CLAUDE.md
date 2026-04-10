@@ -81,3 +81,7 @@ When Spartan releases new components:
 3. Rebuild with `npm run build`
 
 Users can also call `spartan_registry_refresh` at runtime to pick up new components without updating the MCP.
+
+<!-- SKILLS-INDEX-START -->
+[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/conventional-commits:{SKILL.md}
+<!-- SKILLS-INDEX-END -->

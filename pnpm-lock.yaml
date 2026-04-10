@@ -33,6 +33,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^20.5.0
         version: 20.5.0
+      '@commitlint/types':
+        specifier: ^20.5.0
+        version: 20.5.0
       '@types/node':
         specifier: ^22.0.0
         version: 22.19.17
