@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const registryComponentSchema = z.object({
   name: z.string(),
@@ -9,16 +9,16 @@ export const registryComponentSchema = z.object({
   brainDirectives: z.array(z.string()),
   helmComponents: z.array(z.string()),
   category: z.enum([
-    "form",
-    "action",
-    "layout",
-    "overlay",
-    "menu",
-    "navigation",
-    "data-display",
-    "feedback",
-    "typography",
-    "misc",
+    'form',
+    'action',
+    'layout',
+    'overlay',
+    'menu',
+    'navigation',
+    'data-display',
+    'feedback',
+    'typography',
+    'misc',
   ]),
   peerDependencies: z.array(z.string()),
   url: z.string(),

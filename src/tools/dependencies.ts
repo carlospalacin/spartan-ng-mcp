@@ -1,36 +1,36 @@
-import { z } from "zod";
-import type { CacheManager } from "../cache/cache-manager.js";
-import type { AnalogApiClient } from "../data/analog-api.js";
-import { componentNotFound } from "../errors/errors.js";
-import type { RegistryLoader } from "../registry/registry.js";
-import type { ToolDefinition } from "../server.js";
+import { z } from 'zod';
+import type { CacheManager } from '../cache/cache-manager.js';
+import type { AnalogApiClient } from '../data/analog-api.js';
+import { componentNotFound } from '../errors/errors.js';
+import type { RegistryLoader } from '../registry/registry.js';
+import type { ToolDefinition } from '../server.js';
 
 // Known dependency relationships between Spartan components
 // Built from analysis of the spartan-ng/spartan repo
 const COMPONENT_DEPENDENCIES: Record<string, string[]> = {
-  "alert-dialog": ["button"],
-  autocomplete: ["input", "popover"],
-  "button-group": ["button"],
-  calendar: ["button"],
-  carousel: ["button"],
-  combobox: ["input", "popover", "command"],
-  command: ["input", "separator"],
-  "context-menu": ["separator"],
-  "data-table": ["table", "button", "checkbox", "select", "input"],
-  "date-picker": ["calendar", "popover", "button", "input"],
-  dialog: ["button"],
-  "dropdown-menu": ["separator"],
-  field: ["label"],
-  "form-field": ["label", "field"],
-  "input-group": ["input"],
-  menubar: ["separator"],
-  "navigation-menu": ["button"],
-  pagination: ["button"],
-  select: ["label"],
-  sheet: ["button"],
-  sidebar: ["separator", "tooltip", "button", "sheet"],
-  sonner: ["button"],
-  table: ["checkbox"],
+  'alert-dialog': ['button'],
+  autocomplete: ['input', 'popover'],
+  'button-group': ['button'],
+  calendar: ['button'],
+  carousel: ['button'],
+  combobox: ['input', 'popover', 'command'],
+  command: ['input', 'separator'],
+  'context-menu': ['separator'],
+  'data-table': ['table', 'button', 'checkbox', 'select', 'input'],
+  'date-picker': ['calendar', 'popover', 'button', 'input'],
+  dialog: ['button'],
+  'dropdown-menu': ['separator'],
+  field: ['label'],
+  'form-field': ['label', 'field'],
+  'input-group': ['input'],
+  menubar: ['separator'],
+  'navigation-menu': ['button'],
+  pagination: ['button'],
+  select: ['label'],
+  sheet: ['button'],
+  sidebar: ['separator', 'tooltip', 'button', 'sheet'],
+  sonner: ['button'],
+  table: ['checkbox'],
 };
 
 export function createDependencyTools(
@@ -40,10 +40,10 @@ export function createDependencyTools(
 ): ToolDefinition[] {
   return [
     {
-      name: "spartan_dependencies",
-      title: "Component Dependency Graph",
+      name: 'spartan_dependencies',
+      title: 'Component Dependency Graph',
       description:
-        "Show the dependency graph for a Spartan component. Returns direct dependencies (which components it needs), transitive dependencies (up to configurable depth), and reverse dependencies (which components depend on it).",
+        'Show the dependency graph for a Spartan component. Returns direct dependencies (which components it needs), transitive dependencies (up to configurable depth), and reverse dependencies (which components depend on it).',
       inputSchema: {
         name: z.string().min(1).describe("Component name (e.g. 'dialog', 'sidebar')"),
         depth: z
@@ -51,7 +51,7 @@ export function createDependencyTools(
           .min(1)
           .max(3)
           .default(1)
-          .describe("Traversal depth for transitive dependencies (1-3)"),
+          .describe('Traversal depth for transitive dependencies (1-3)'),
       },
       handler: async (args: { name: string; depth?: number }) => {
         const name = args.name.trim().toLowerCase();
@@ -93,7 +93,7 @@ export function createDependencyTools(
           const depComp = registry.getComponent(depName);
           return {
             name: depName,
-            category: depComp?.category ?? "unknown",
+            category: depComp?.category ?? 'unknown',
             brainPackage: depComp?.brainPackage ?? `@spartan-ng/brain/${depName}`,
             helmPackage: depComp?.helmPackage ?? `@spartan-ng/helm/${depName}`,
           };
@@ -116,7 +116,7 @@ export function createDependencyTools(
         };
 
         return {
-          content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+          content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }],
         };
       },
     },

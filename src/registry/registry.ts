@@ -1,15 +1,15 @@
-import { readFile } from "node:fs/promises";
-import { SpartanError, SpartanErrorCode } from "../errors/errors.js";
+import { readFile } from 'node:fs/promises';
+import { SpartanError, SpartanErrorCode } from '../errors/errors.js';
 import {
   type RegistryBlock,
   type RegistryComponent,
   type SpartanRegistry,
   spartanRegistrySchema,
-} from "./schema.js";
+} from './schema.js';
 
 export interface SearchableItem {
   name: string;
-  type: "component" | "block" | "doc";
+  type: 'component' | 'block' | 'doc';
   category?: string;
   description?: string;
 }
@@ -28,13 +28,13 @@ export class RegistryLoader {
     // Default: try to load from the src registry.json (resolved from project root)
     // This works both in dev (src/) and in dist/ if the JSON is copied
     const possiblePaths = [
-      new URL("./registry.json", import.meta.url),
-      new URL("../../src/registry/registry.json", import.meta.url),
+      new URL('./registry.json', import.meta.url),
+      new URL('../../src/registry/registry.json', import.meta.url),
     ];
 
     for (const pathUrl of possiblePaths) {
       try {
-        const raw = await readFile(pathUrl, "utf-8");
+        const raw = await readFile(pathUrl, 'utf-8');
         const parsed = JSON.parse(raw);
         this.registry = spartanRegistrySchema.parse(parsed);
         return;
@@ -45,9 +45,9 @@ export class RegistryLoader {
 
     // No registry found — use empty
     this.registry = {
-      version: "0.0.0",
+      version: '0.0.0',
       generatedAt: new Date().toISOString(),
-      spartanVersion: "unknown",
+      spartanVersion: 'unknown',
       components: {},
       blocks: {},
       docs: [],
@@ -56,26 +56,26 @@ export class RegistryLoader {
 
   private async loadFromFile(filePath: string): Promise<void> {
     try {
-      const raw = await readFile(filePath, "utf-8");
+      const raw = await readFile(filePath, 'utf-8');
       const parsed = JSON.parse(raw);
       this.registry = spartanRegistrySchema.parse(parsed);
     } catch (error) {
       if (
         error instanceof Error &&
-        "code" in error &&
-        (error as NodeJS.ErrnoException).code === "ENOENT"
+        'code' in error &&
+        (error as NodeJS.ErrnoException).code === 'ENOENT'
       ) {
         this.registry = {
-          version: "0.0.0",
+          version: '0.0.0',
           generatedAt: new Date().toISOString(),
-          spartanVersion: "unknown",
+          spartanVersion: 'unknown',
           components: {},
           blocks: {},
           docs: [],
         };
         return;
       }
-      throw new SpartanError("Failed to load registry", {
+      throw new SpartanError('Failed to load registry', {
         code: SpartanErrorCode.CACHE_READ_ERROR,
         suggestion: "Run 'npm run generate-registry' to create the registry file.",
         cause: error,
@@ -85,7 +85,7 @@ export class RegistryLoader {
 
   private ensureLoaded(): SpartanRegistry {
     if (!this.registry) {
-      throw new SpartanError("Registry not initialized. Call initialize() first.", {
+      throw new SpartanError('Registry not initialized. Call initialize() first.', {
         code: SpartanErrorCode.UNKNOWN_ERROR,
       });
     }
@@ -125,16 +125,16 @@ export class RegistryLoader {
     for (const comp of Object.values(reg.components)) {
       items.push({
         name: comp.name,
-        type: "component",
+        type: 'component',
         category: comp.category,
-        description: `${comp.brainAvailable ? "Brain" : ""}${comp.brainAvailable && comp.helmAvailable ? " + " : ""}${comp.helmAvailable ? "Helm" : ""} component`,
+        description: `${comp.brainAvailable ? 'Brain' : ''}${comp.brainAvailable && comp.helmAvailable ? ' + ' : ''}${comp.helmAvailable ? 'Helm' : ''} component`,
       });
     }
 
     for (const block of Object.values(reg.blocks)) {
       items.push({
         name: block.variant,
-        type: "block",
+        type: 'block',
         category: block.category,
       });
     }
@@ -142,7 +142,7 @@ export class RegistryLoader {
     for (const doc of reg.docs) {
       items.push({
         name: doc,
-        type: "doc",
+        type: 'doc',
       });
     }
 

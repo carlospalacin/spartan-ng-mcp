@@ -1,20 +1,20 @@
-import { access, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
-import { execFile } from "node:child_process";
-import { join } from "node:path";
-import { tmpdir } from "node:os";
-import { promisify } from "node:util";
-import { z } from "zod";
-import type { ToolDefinition } from "../server.js";
+import { execFile } from 'node:child_process';
+import { access, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { promisify } from 'node:util';
+import { z } from 'zod';
+import type { ToolDefinition } from '../server.js';
 
 const execFileAsync = promisify(execFile);
 
-const SKILLS_REPO = "https://github.com/carlospalacin/spartan-ng-skills.git";
+const SKILLS_REPO = 'https://github.com/carlospalacin/spartan-ng-skills.git';
 
 const SKILLS_LOCAL_PATHS = [
   // Sibling repo (development)
-  join(process.cwd(), "..", "spartan-ng-skills", ".claude", "skills", "spartan"),
+  join(process.cwd(), '..', 'spartan-ng-skills', '.claude', 'skills', 'spartan'),
   // Bundled with MCP (future)
-  join(process.cwd(), "skills", "spartan"),
+  join(process.cwd(), 'skills', 'spartan'),
 ];
 
 async function findLocalSkills(): Promise<string | null> {
@@ -31,10 +31,10 @@ async function findLocalSkills(): Promise<string | null> {
 
 async function cloneSkillsRepo(): Promise<string> {
   const tmpDir = join(tmpdir(), `spartan-ng-skills-${Date.now()}`);
-  await execFileAsync("git", ["clone", "--depth", "1", SKILLS_REPO, tmpDir], {
+  await execFileAsync('git', ['clone', '--depth', '1', SKILLS_REPO, tmpDir], {
     timeout: 30_000,
   });
-  return join(tmpDir, ".claude", "skills", "spartan");
+  return join(tmpDir, '.claude', 'skills', 'spartan');
 }
 
 async function copyDirRecursive(src: string, dest: string): Promise<string[]> {
@@ -49,9 +49,9 @@ async function copyDirRecursive(src: string, dest: string): Promise<string[]> {
     if (entry.isDirectory()) {
       const subCopied = await copyDirRecursive(srcPath, destPath);
       copied.push(...subCopied);
-    } else if (entry.isFile() && entry.name.endsWith(".md")) {
-      const content = await readFile(srcPath, "utf-8");
-      await writeFile(destPath, content, "utf-8");
+    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+      const content = await readFile(srcPath, 'utf-8');
+      await writeFile(destPath, content, 'utf-8');
       copied.push(destPath);
     }
   }
@@ -62,19 +62,19 @@ async function copyDirRecursive(src: string, dest: string): Promise<string[]> {
 export function createSkillsTools(): ToolDefinition[] {
   return [
     {
-      name: "spartan_install_skills",
-      title: "Install Spartan Skills",
+      name: 'spartan_install_skills',
+      title: 'Install Spartan Skills',
       description:
         "Install Spartan Angular UI skills into a project's .claude/skills/spartan/ directory. Skills teach AI assistants how to correctly use Spartan components — Brain/Helm patterns, composition rules, styling conventions. Fetches from GitHub if not available locally.",
       inputSchema: {
         cwd: z
           .string()
           .optional()
-          .describe("Target project directory (defaults to current working directory)"),
+          .describe('Target project directory (defaults to current working directory)'),
       },
       handler: async (args: { cwd?: string }) => {
         const targetRoot = args.cwd ?? process.cwd();
-        const targetDir = join(targetRoot, ".claude", "skills", "spartan");
+        const targetDir = join(targetRoot, '.claude', 'skills', 'spartan');
 
         // Try local source first, then clone from GitHub
         let skillsSource = await findLocalSkills();
@@ -84,19 +84,22 @@ export function createSkillsTools(): ToolDefinition[] {
           try {
             skillsSource = await cloneSkillsRepo();
             // Track parent tmp dir for cleanup
-            clonedTmpDir = join(tmpdir(), skillsSource.split(tmpdir() + "/")[1]?.split("/")[0] ?? "");
+            clonedTmpDir = join(
+              tmpdir(),
+              skillsSource.split(tmpdir() + '/')[1]?.split('/')[0] ?? '',
+            );
           } catch (error) {
             return {
               content: [
                 {
-                  type: "text" as const,
+                  type: 'text' as const,
                   text: JSON.stringify(
                     {
                       installed: false,
                       error: `Failed to clone skills repo: ${String(error)}`,
                       repo: SKILLS_REPO,
                       suggestion:
-                        "Ensure git is installed and you have internet access. You can also clone manually: git clone " +
+                        'Ensure git is installed and you have internet access. You can also clone manually: git clone ' +
                         SKILLS_REPO,
                     },
                     null,
@@ -121,14 +124,14 @@ export function createSkillsTools(): ToolDefinition[] {
         return {
           content: [
             {
-              type: "text" as const,
+              type: 'text' as const,
               text: JSON.stringify(
                 {
                   installed: true,
                   targetDir,
                   source,
                   filesInstalled: copied.length,
-                  files: copied.map((f) => f.replace(targetRoot + "/", "")),
+                  files: copied.map((f) => f.replace(targetRoot + '/', '')),
                 },
                 null,
                 2,

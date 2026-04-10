@@ -1,6 +1,6 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { z } from "zod";
-import { SpartanError } from "./errors/errors.js";
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { z } from 'zod';
+import { SpartanError } from './errors/errors.js';
 
 export interface ToolDefinition {
   name: string;
@@ -9,22 +9,22 @@ export interface ToolDefinition {
   inputSchema: Record<string, z.ZodTypeAny>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handler: (args: any) => Promise<{
-    content: Array<{ type: "text"; text: string }>;
+    content: Array<{ type: 'text'; text: string }>;
     isError?: boolean;
   }>;
 }
 
-function wrapHandler(handler: ToolDefinition["handler"]): ToolDefinition["handler"] {
+function wrapHandler(handler: ToolDefinition['handler']): ToolDefinition['handler'] {
   return async (args) => {
     try {
       return await handler(args);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const message = error.errors.map((e) => `- ${e.path.join(".")}: ${e.message}`).join("\n");
+        const message = error.errors.map((e) => `- ${e.path.join('.')}: ${e.message}`).join('\n');
         return {
           content: [
             {
-              type: "text" as const,
+              type: 'text' as const,
               text: `Validation Error:\n${message}`,
             },
           ],
@@ -38,7 +38,7 @@ function wrapHandler(handler: ToolDefinition["handler"]): ToolDefinition["handle
           text += `\n\nSuggestion: ${error.suggestion}`;
         }
         return {
-          content: [{ type: "text" as const, text }],
+          content: [{ type: 'text' as const, text }],
           isError: true,
         };
       }
@@ -46,7 +46,7 @@ function wrapHandler(handler: ToolDefinition["handler"]): ToolDefinition["handle
       return {
         content: [
           {
-            type: "text" as const,
+            type: 'text' as const,
             text: `Unexpected error: ${String(error)}`,
           },
         ],
@@ -64,7 +64,7 @@ export function registerToolGroup(server: McpServer, tools: ToolDefinition[]): v
 
 export function createServer(): McpServer {
   return new McpServer({
-    name: "spartan-ng-mcp",
-    version: "2.0.0",
+    name: 'spartan-ng-mcp',
+    version: '2.0.0',
   });
 }

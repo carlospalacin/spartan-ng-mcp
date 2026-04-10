@@ -16,22 +16,22 @@ export function extractImportsFromSource(source: string): ExtractedImports {
   let match: RegExpExecArray | null;
   while ((match = importRegex.exec(source)) !== null) {
     const items = match[1]
-      .split(",")
+      .split(',')
       .map((s) => s.trim())
       .filter(Boolean);
     const from = match[2];
 
     for (const item of items) {
-      const name = item.replace(/\s+as\s+\w+/, "").trim();
+      const name = item.replace(/\s+as\s+\w+/, '').trim();
       if (!name) continue;
 
-      if (from.includes("@spartan-ng/")) {
+      if (from.includes('@spartan-ng/')) {
         spartan.add(name);
-      } else if (from.includes("@angular/cdk")) {
+      } else if (from.includes('@angular/cdk')) {
         cdk.add(name);
-      } else if (from.includes("@angular/")) {
+      } else if (from.includes('@angular/')) {
         angular.add(name);
-      } else if (!from.startsWith(".") && !from.startsWith("/")) {
+      } else if (!from.startsWith('.') && !from.startsWith('/')) {
         other.add(name);
       }
     }
@@ -59,11 +59,11 @@ export function extractExportsFromIndex(content: string): string[] {
   const namedExportRegex = /export\s*\{([^}]+)\}/g;
   while ((match = namedExportRegex.exec(content)) !== null) {
     const items = match[1]
-      .split(",")
+      .split(',')
       .map((s) => s.trim())
       .filter(Boolean);
     for (const item of items) {
-      exports.add(item.replace(/\s+as\s+\w+/, "").trim());
+      exports.add(item.replace(/\s+as\s+\w+/, '').trim());
     }
   }
 

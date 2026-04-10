@@ -1,29 +1,29 @@
 export const SpartanErrorCode = {
   // Network
-  NETWORK_ERROR: "NETWORK_ERROR",
-  TIMEOUT: "TIMEOUT",
-  RATE_LIMITED: "RATE_LIMITED",
-  SSRF_VIOLATION: "SSRF_VIOLATION",
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  TIMEOUT: 'TIMEOUT',
+  RATE_LIMITED: 'RATE_LIMITED',
+  SSRF_VIOLATION: 'SSRF_VIOLATION',
 
   // Data
-  COMPONENT_NOT_FOUND: "COMPONENT_NOT_FOUND",
-  BLOCK_NOT_FOUND: "BLOCK_NOT_FOUND",
-  DOC_NOT_FOUND: "DOC_NOT_FOUND",
-  PARSE_ERROR: "PARSE_ERROR",
-  API_SCHEMA_CHANGED: "API_SCHEMA_CHANGED",
+  COMPONENT_NOT_FOUND: 'COMPONENT_NOT_FOUND',
+  BLOCK_NOT_FOUND: 'BLOCK_NOT_FOUND',
+  DOC_NOT_FOUND: 'DOC_NOT_FOUND',
+  PARSE_ERROR: 'PARSE_ERROR',
+  API_SCHEMA_CHANGED: 'API_SCHEMA_CHANGED',
 
   // Project
-  NO_ANGULAR_PROJECT: "NO_ANGULAR_PROJECT",
-  NO_SPARTAN_INSTALLED: "NO_SPARTAN_INSTALLED",
+  NO_ANGULAR_PROJECT: 'NO_ANGULAR_PROJECT',
+  NO_SPARTAN_INSTALLED: 'NO_SPARTAN_INSTALLED',
 
   // Cache & Registry
-  CACHE_READ_ERROR: "CACHE_READ_ERROR",
-  CACHE_WRITE_ERROR: "CACHE_WRITE_ERROR",
-  REGISTRY_STALE: "REGISTRY_STALE",
+  CACHE_READ_ERROR: 'CACHE_READ_ERROR',
+  CACHE_WRITE_ERROR: 'CACHE_WRITE_ERROR',
+  REGISTRY_STALE: 'REGISTRY_STALE',
 
   // General
-  VALIDATION_ERROR: "VALIDATION_ERROR",
-  UNKNOWN_ERROR: "UNKNOWN_ERROR",
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  UNKNOWN_ERROR: 'UNKNOWN_ERROR',
 } as const;
 
 export type SpartanErrorCode = (typeof SpartanErrorCode)[keyof typeof SpartanErrorCode];
@@ -43,7 +43,7 @@ export class SpartanError extends Error {
 
   constructor(message: string, options: SpartanErrorOptions) {
     super(message, { cause: options.cause });
-    this.name = "SpartanError";
+    this.name = 'SpartanError';
     this.code = options.code;
     this.suggestion = options.suggestion;
     this.context = options.context;
@@ -66,7 +66,7 @@ export function componentNotFound(name: string): SpartanError {
   return new SpartanError(`Unknown component: "${name}"`, {
     code: SpartanErrorCode.COMPONENT_NOT_FOUND,
     suggestion:
-      "Use spartan_list to see available components, or spartan_search to find by keyword.",
+      'Use spartan_list to see available components, or spartan_search to find by keyword.',
     context: { name },
   });
 }
@@ -84,7 +84,7 @@ export function rateLimited(resetAt: number): SpartanError {
   return new SpartanError(`GitHub API rate limit exceeded. Resets at ${resetDate}.`, {
     code: SpartanErrorCode.RATE_LIMITED,
     suggestion:
-      "Set GITHUB_TOKEN environment variable for 5000 requests/hour (no scopes needed for public repos).",
+      'Set GITHUB_TOKEN environment variable for 5000 requests/hour (no scopes needed for public repos).',
     context: { resetAt, resetAtISO: resetDate },
   });
 }

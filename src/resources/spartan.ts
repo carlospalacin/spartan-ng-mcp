@@ -1,7 +1,7 @@
-import { ResourceTemplate, type McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CacheManager } from "../cache/cache-manager.js";
-import type { AnalogApiClient } from "../data/analog-api.js";
-import type { RegistryLoader } from "../registry/registry.js";
+import { ResourceTemplate, type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import type { CacheManager } from '../cache/cache-manager.js';
+import type { AnalogApiClient } from '../data/analog-api.js';
+import type { RegistryLoader } from '../registry/registry.js';
 
 export function registerResourceHandlers(
   server: McpServer,
@@ -11,11 +11,11 @@ export function registerResourceHandlers(
 ): void {
   // spartan://components/list (static URI — no variables)
   server.resource(
-    "Component List",
-    "spartan://components/list",
+    'Component List',
+    'spartan://components/list',
     {
-      description: "List all Spartan components with Brain/Helm availability",
-      mimeType: "application/json",
+      description: 'List all Spartan components with Brain/Helm availability',
+      mimeType: 'application/json',
     },
     async () => {
       const components = registry.listComponents().map((c) => ({
@@ -31,8 +31,8 @@ export function registerResourceHandlers(
       return {
         contents: [
           {
-            uri: "spartan://components/list",
-            mimeType: "application/json",
+            uri: 'spartan://components/list',
+            mimeType: 'application/json',
             text: JSON.stringify(
               {
                 componentCount: components.length,
@@ -50,16 +50,16 @@ export function registerResourceHandlers(
 
   // spartan://component/{name}/api (template URI)
   server.resource(
-    "Component API Documentation",
-    new ResourceTemplate("spartan://component/{name}/api", { list: undefined }),
+    'Component API Documentation',
+    new ResourceTemplate('spartan://component/{name}/api', { list: undefined }),
     {
-      description: "Brain & Helm API specs for a component",
-      mimeType: "application/json",
+      description: 'Brain & Helm API specs for a component',
+      mimeType: 'application/json',
     },
     async (uri, variables) => {
       const name = String(Array.isArray(variables.name) ? variables.name[0] : variables.name);
 
-      const componentData = await cacheManager.get("components", name, () =>
+      const componentData = await cacheManager.get('components', name, () =>
         analogApi.getComponent(name),
       );
       const comp = registry.getComponent(name);
@@ -68,7 +68,7 @@ export function registerResourceHandlers(
         contents: [
           {
             uri: uri.toString(),
-            mimeType: "application/json",
+            mimeType: 'application/json',
             text: JSON.stringify(
               {
                 name: componentData.name,
@@ -90,16 +90,16 @@ export function registerResourceHandlers(
 
   // spartan://component/{name}/examples (template URI)
   server.resource(
-    "Component Examples",
-    new ResourceTemplate("spartan://component/{name}/examples", { list: undefined }),
+    'Component Examples',
+    new ResourceTemplate('spartan://component/{name}/examples', { list: undefined }),
     {
-      description: "Code examples for a component",
-      mimeType: "application/json",
+      description: 'Code examples for a component',
+      mimeType: 'application/json',
     },
     async (uri, variables) => {
       const name = String(Array.isArray(variables.name) ? variables.name[0] : variables.name);
 
-      const componentData = await cacheManager.get("components", name, () =>
+      const componentData = await cacheManager.get('components', name, () =>
         analogApi.getComponent(name),
       );
 
@@ -107,7 +107,7 @@ export function registerResourceHandlers(
         contents: [
           {
             uri: uri.toString(),
-            mimeType: "application/json",
+            mimeType: 'application/json',
             text: JSON.stringify(
               {
                 name: componentData.name,
@@ -125,11 +125,11 @@ export function registerResourceHandlers(
 
   // spartan://blocks/list (static URI)
   server.resource(
-    "Block List",
-    "spartan://blocks/list",
+    'Block List',
+    'spartan://blocks/list',
     {
-      description: "List all Spartan page-level blocks by category",
-      mimeType: "application/json",
+      description: 'List all Spartan page-level blocks by category',
+      mimeType: 'application/json',
     },
     async () => {
       const blocks = registry.listBlocks();
@@ -142,8 +142,8 @@ export function registerResourceHandlers(
       return {
         contents: [
           {
-            uri: "spartan://blocks/list",
-            mimeType: "application/json",
+            uri: 'spartan://blocks/list',
+            mimeType: 'application/json',
             text: JSON.stringify({ blockCount: blocks.length, categories: grouped }, null, 2),
           },
         ],
@@ -153,18 +153,18 @@ export function registerResourceHandlers(
 
   // spartan://project/info (static URI)
   server.resource(
-    "Project Information",
-    "spartan://project/info",
+    'Project Information',
+    'spartan://project/info',
     {
-      description: "Basic registry information",
-      mimeType: "application/json",
+      description: 'Basic registry information',
+      mimeType: 'application/json',
     },
     async () => {
       return {
         contents: [
           {
-            uri: "spartan://project/info",
-            mimeType: "application/json",
+            uri: 'spartan://project/info',
+            mimeType: 'application/json',
             text: JSON.stringify(
               {
                 registryVersion: registry.getVersion(),

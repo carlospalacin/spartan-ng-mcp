@@ -75,7 +75,7 @@ export interface BlockData {
   variant: string;
   files: SourceFile[];
   sharedFiles: SourceFile[];
-  imports: import("../utils/imports.js").ExtractedImports;
+  imports: import('../utils/imports.js').ExtractedImports;
 }
 
 export interface GitHubFile {
@@ -88,7 +88,7 @@ export interface GitHubFile {
 export interface GitHubEntry {
   name: string;
   path: string;
-  type: "file" | "dir";
+  type: 'file' | 'dir';
   size: number;
   sha: string;
 }

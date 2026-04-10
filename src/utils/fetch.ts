@@ -1,5 +1,5 @@
-import { SpartanError, SpartanErrorCode, ssrfViolation } from "../errors/errors.js";
-import { ALLOWED_HOSTS, DEFAULT_FETCH_TIMEOUT_MS } from "./constants.js";
+import { SpartanError, SpartanErrorCode, ssrfViolation } from '../errors/errors.js';
+import { ALLOWED_HOSTS, DEFAULT_FETCH_TIMEOUT_MS } from './constants.js';
 
 export interface FetchOptions {
   timeoutMs?: number;
@@ -23,7 +23,7 @@ export async function safeFetch(url: string, options: FetchOptions = {}): Promis
   try {
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "spartan-ng-mcp/2.0",
+        'User-Agent': 'spartan-ng-mcp/2.0',
         ...headers,
       },
       signal: controller.signal,
@@ -40,7 +40,7 @@ export async function safeFetch(url: string, options: FetchOptions = {}): Promis
   } catch (error) {
     if (error instanceof SpartanError) throw error;
 
-    if (error instanceof DOMException && error.name === "AbortError") {
+    if (error instanceof DOMException && error.name === 'AbortError') {
       throw new SpartanError(`Request timed out after ${timeoutMs}ms: ${url}`, {
         code: SpartanErrorCode.TIMEOUT,
         context: { url, timeoutMs },

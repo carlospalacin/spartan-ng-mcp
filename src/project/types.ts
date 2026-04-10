@@ -3,7 +3,7 @@ export interface SpartanProjectContext {
   angularVersion: string | null;
   isNxWorkspace: boolean;
   nxVersion: string | null;
-  projectType: "application" | "library" | null;
+  projectType: 'application' | 'library' | null;
   isZoneless: boolean;
 
   // Spartan
@@ -15,12 +15,12 @@ export interface SpartanProjectContext {
   };
 
   // Tailwind
-  tailwindVersion: "v3" | "v4" | null;
+  tailwindVersion: 'v3' | 'v4' | null;
   tailwindConfigPath: string | null;
   hasSpartanPreset: boolean;
 
   // Project
-  packageManager: "npm" | "pnpm" | "yarn" | "bun";
+  packageManager: 'npm' | 'pnpm' | 'yarn' | 'bun';
   srcDir: boolean;
   rootDir: string;
 }

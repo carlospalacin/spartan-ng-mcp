@@ -1,12 +1,12 @@
-import { SpartanError, SpartanErrorCode, rateLimited } from "../errors/errors.js";
+import { SpartanError, SpartanErrorCode, rateLimited } from '../errors/errors.js';
 import {
   DEFAULT_FETCH_TIMEOUT_MS,
   GITHUB_API_BASE,
   GITHUB_RAW_BASE,
   SPARTAN_REPO,
   SPARTAN_REPO_BRANCH,
-} from "../utils/constants.js";
-import type { GitHubEntry, GitHubFile, RateLimitInfo, SourceFile } from "./types.js";
+} from '../utils/constants.js';
+import type { GitHubEntry, GitHubFile, RateLimitInfo, SourceFile } from './types.js';
 
 const rateLimitInfo = {
   limit: 60,
@@ -16,12 +16,12 @@ const rateLimitInfo = {
 
 function getHeaders(): Record<string, string> {
   const headers: Record<string, string> = {
-    "User-Agent": "spartan-ng-mcp/2.0",
-    Accept: "application/vnd.github.v3+json",
+    'User-Agent': 'spartan-ng-mcp/2.0',
+    Accept: 'application/vnd.github.v3+json',
   };
   const token = process.env.GITHUB_TOKEN;
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+    headers['Authorization'] = `Bearer ${token}`;
   }
   return headers;
 }
@@ -42,9 +42,9 @@ async function githubFetch(url: string): Promise<Response> {
     });
 
     // Update rate limit from headers
-    const limit = res.headers.get("x-ratelimit-limit");
-    const remaining = res.headers.get("x-ratelimit-remaining");
-    const reset = res.headers.get("x-ratelimit-reset");
+    const limit = res.headers.get('x-ratelimit-limit');
+    const remaining = res.headers.get('x-ratelimit-remaining');
+    const reset = res.headers.get('x-ratelimit-reset');
     if (limit) rateLimitInfo.limit = Number(limit);
     if (remaining) rateLimitInfo.remaining = Number(remaining);
     if (reset) rateLimitInfo.resetAt = Number(reset) * 1000;
@@ -69,7 +69,7 @@ async function githubFetch(url: string): Promise<Response> {
   } catch (error) {
     if (error instanceof SpartanError) throw error;
 
-    if (error instanceof DOMException && error.name === "AbortError") {
+    if (error instanceof DOMException && error.name === 'AbortError') {
       throw new SpartanError(`GitHub request timed out: ${url}`, {
         code: SpartanErrorCode.TIMEOUT,
         context: { url },
@@ -96,11 +96,11 @@ export class GitHubClient {
     const res = await githubFetch(url);
     const json = (await res.json()) as Record<string, unknown>;
 
-    const content = Buffer.from(String(json.content ?? ""), "base64").toString("utf-8");
+    const content = Buffer.from(String(json.content ?? ''), 'base64').toString('utf-8');
 
     return {
       content,
-      sha: String(json.sha ?? ""),
+      sha: String(json.sha ?? ''),
       size: Number(json.size ?? 0),
       path: String(json.path ?? filePath),
     };
@@ -119,18 +119,18 @@ export class GitHubClient {
     }
 
     return json.map((entry) => ({
-      name: String(entry.name ?? ""),
-      path: String(entry.path ?? ""),
-      type: String(entry.type ?? "file") as "file" | "dir",
+      name: String(entry.name ?? ''),
+      path: String(entry.path ?? ''),
+      type: String(entry.type ?? 'file') as 'file' | 'dir',
       size: Number(entry.size ?? 0),
-      sha: String(entry.sha ?? ""),
+      sha: String(entry.sha ?? ''),
     }));
   }
 
   async fetchDirectoryFiles(dirPath: string): Promise<SourceFile[]> {
     const entries = await this.fetchDirectory(dirPath);
     const tsFiles = entries.filter(
-      (e) => e.type === "file" && (e.name.endsWith(".ts") || e.name.endsWith(".js")),
+      (e) => e.type === 'file' && (e.name.endsWith('.ts') || e.name.endsWith('.js')),
     );
 
     const files: SourceFile[] = [];
@@ -144,7 +144,7 @@ export class GitHubClient {
     }
 
     // Recurse into subdirectories
-    const dirs = entries.filter((e) => e.type === "dir");
+    const dirs = entries.filter((e) => e.type === 'dir');
     for (const dir of dirs) {
       const subFiles = await this.fetchDirectoryFiles(dir.path);
       files.push(
@@ -166,7 +166,7 @@ export class GitHubClient {
 
     try {
       const res = await fetch(url, {
-        headers: { "User-Agent": "spartan-ng-mcp/2.0" },
+        headers: { 'User-Agent': 'spartan-ng-mcp/2.0' },
         signal: controller.signal,
       });
 
@@ -188,7 +188,7 @@ export class GitHubClient {
       limit: rateLimitInfo.limit,
       remaining: rateLimitInfo.remaining,
       resetAt: rateLimitInfo.resetAt,
-      resetAtISO: rateLimitInfo.resetAt ? new Date(rateLimitInfo.resetAt).toISOString() : "",
+      resetAtISO: rateLimitInfo.resetAt ? new Date(rateLimitInfo.resetAt).toISOString() : '',
       hasToken: Boolean(process.env.GITHUB_TOKEN),
     };
   }

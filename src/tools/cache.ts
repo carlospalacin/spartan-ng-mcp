@@ -1,10 +1,10 @@
-import { z } from "zod";
-import type { CacheManager } from "../cache/cache-manager.js";
-import type { AnalogApiClient } from "../data/analog-api.js";
-import type { GitHubClient } from "../data/github.js";
-import type { RegistryLoader } from "../registry/registry.js";
-import { spartanRegistrySchema } from "../registry/schema.js";
-import type { ToolDefinition } from "../server.js";
+import { z } from 'zod';
+import type { CacheManager } from '../cache/cache-manager.js';
+import type { AnalogApiClient } from '../data/analog-api.js';
+import type { GitHubClient } from '../data/github.js';
+import type { RegistryLoader } from '../registry/registry.js';
+import { spartanRegistrySchema } from '../registry/schema.js';
+import type { ToolDefinition } from '../server.js';
 
 export function createCacheTools(
   cacheManager: CacheManager,
@@ -14,32 +14,32 @@ export function createCacheTools(
 ): ToolDefinition[] {
   return [
     {
-      name: "spartan_cache",
-      title: "Cache Management",
+      name: 'spartan_cache',
+      title: 'Cache Management',
       description:
-        "Manage the MCP server cache. Check status (memory + file stats), clear cached data, or trigger a full rebuild from live sources.",
+        'Manage the MCP server cache. Check status (memory + file stats), clear cached data, or trigger a full rebuild from live sources.',
       inputSchema: {
         action: z
-          .enum(["status", "clear", "rebuild"])
+          .enum(['status', 'clear', 'rebuild'])
           .describe(
-            "Cache action: status (show stats), clear (delete cached data), rebuild (refetch from network)",
+            'Cache action: status (show stats), clear (delete cached data), rebuild (refetch from network)',
           ),
         scope: z
-          .enum(["all", "components", "docs", "blocks", "source"])
-          .default("all")
-          .describe("Which cache category to act on"),
+          .enum(['all', 'components', 'docs', 'blocks', 'source'])
+          .default('all')
+          .describe('Which cache category to act on'),
       },
       handler: async (args: { action: string; scope?: string }) => {
-        const scope = args.scope ?? "all";
+        const scope = args.scope ?? 'all';
 
-        if (args.action === "status") {
+        if (args.action === 'status') {
           const stats = await cacheManager.stats();
           const rateLimit = github.getRateLimit();
 
           return {
             content: [
               {
-                type: "text" as const,
+                type: 'text' as const,
                 text: JSON.stringify(
                   {
                     cache: stats,
@@ -66,20 +66,20 @@ export function createCacheTools(
           };
         }
 
-        if (args.action === "clear") {
-          if (scope === "all") {
+        if (args.action === 'clear') {
+          if (scope === 'all') {
             await cacheManager.clear();
           } else {
-            await cacheManager.clear(scope as "components" | "docs" | "blocks" | "source");
+            await cacheManager.clear(scope as 'components' | 'docs' | 'blocks' | 'source');
           }
 
           return {
             content: [
               {
-                type: "text" as const,
+                type: 'text' as const,
                 text: JSON.stringify(
                   {
-                    action: "clear",
+                    action: 'clear',
                     scope,
                     message: `Cache cleared for scope: ${scope}`,
                   },
@@ -93,16 +93,16 @@ export function createCacheTools(
 
         // rebuild
         await cacheManager.clear(
-          scope === "all" ? undefined : (scope as "components" | "docs" | "blocks" | "source"),
+          scope === 'all' ? undefined : (scope as 'components' | 'docs' | 'blocks' | 'source'),
         );
 
         return {
           content: [
             {
-              type: "text" as const,
+              type: 'text' as const,
               text: JSON.stringify(
                 {
-                  action: "rebuild",
+                  action: 'rebuild',
                   scope,
                   message: `Cache cleared for scope: ${scope}. Data will be re-fetched on next request.`,
                 },
@@ -115,12 +115,12 @@ export function createCacheTools(
       },
     },
     {
-      name: "spartan_registry_refresh",
-      title: "Refresh Component Registry",
+      name: 'spartan_registry_refresh',
+      title: 'Refresh Component Registry',
       description:
-        "Refresh the component registry from the live Spartan Analog API. Updates the in-memory registry with the latest components without requiring an MCP update. Shows diff of added/updated/removed components.",
+        'Refresh the component registry from the live Spartan Analog API. Updates the in-memory registry with the latest components without requiring an MCP update. Shows diff of added/updated/removed components.',
       inputSchema: {
-        force: z.boolean().default(false).describe("Refresh even if the registry is not stale"),
+        force: z.boolean().default(false).describe('Refresh even if the registry is not stale'),
       },
       handler: async (args: { force?: boolean }) => {
         const wasStale = registry.isStale();
@@ -129,11 +129,11 @@ export function createCacheTools(
           return {
             content: [
               {
-                type: "text" as const,
+                type: 'text' as const,
                 text: JSON.stringify(
                   {
                     refreshed: false,
-                    reason: "Registry is not stale. Use force=true to refresh anyway.",
+                    reason: 'Registry is not stale. Use force=true to refresh anyway.',
                     generatedAt: registry.getGeneratedAt(),
                     componentCount: registry.getComponentCount(),
                   },
@@ -166,8 +166,8 @@ export function createCacheTools(
             helmPackage: `@spartan-ng/helm/${name}`,
             brainDirectives,
             helmComponents,
-            category: "misc", // Simplified — full categorization in generator script
-            peerDependencies: ["@angular/cdk"],
+            category: 'misc', // Simplified — full categorization in generator script
+            peerDependencies: ['@angular/cdk'],
             url: `https://www.spartan.ng/components/${name}`,
           };
         }
@@ -180,7 +180,7 @@ export function createCacheTools(
         const newRegistry = spartanRegistrySchema.parse({
           version: registry.getVersion(),
           generatedAt: new Date().toISOString(),
-          spartanVersion: "latest",
+          spartanVersion: 'latest',
           components,
           blocks: currentBlocks,
           docs: registry.listDocs(),
@@ -191,7 +191,7 @@ export function createCacheTools(
         return {
           content: [
             {
-              type: "text" as const,
+              type: 'text' as const,
               text: JSON.stringify(
                 {
                   refreshed: true,
