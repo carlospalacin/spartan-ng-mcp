@@ -16,20 +16,17 @@ Spartan's dual-layer architecture (Brain for headless logic + Helm for styled co
 - **Installation command generation** — `nx generate` or `npm install` with peer dependency resolution
 - **Post-install audit** — verification checklist for Tailwind preset, Brain/Helm pairing, OnPush
 - **Runtime registry refresh** — pick up new Spartan components without an MCP update
-- **Skills installer** — deploy [spartan-ng-skills](https://github.com/jcpalaci/spartan-ng-skills) to any Angular project
+- **Skills installer** — deploy [spartan-ng-skills](https://github.com/carlospalacin/spartan-ng-skills) to any Angular project
 
 ## Quick Start
 
-### 1. Install & Build
+### Install from npm
 
 ```bash
-git clone https://github.com/jcpalaci/spartan-ng-mcp.git
-cd spartan-ng-mcp
-npm install
-npm run build
+npm install -g spartan-ng-mcp
 ```
 
-### 2. Configure Your IDE
+### Configure Your IDE
 
 #### Claude Code
 
@@ -39,8 +36,8 @@ Add to your project's `.mcp.json`:
 {
   "mcpServers": {
     "spartan-ng": {
-      "command": "node",
-      "args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "spartan-ng-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token_here"
       }
@@ -57,8 +54,8 @@ Add to `.cursor/mcp.json`:
 {
   "mcpServers": {
     "spartan-ng": {
-      "command": "node",
-      "args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "spartan-ng-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token_here"
       }
@@ -75,8 +72,8 @@ Add to `.vscode/mcp.json`:
 {
   "servers": {
     "spartan-ng": {
-      "command": "node",
-      "args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "spartan-ng-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_your_token_here"
       }
@@ -87,75 +84,86 @@ Add to `.vscode/mcp.json`:
 
 > **Note:** The `GITHUB_TOKEN` is optional but recommended. Without it, GitHub API requests are limited to 60/hr. With a token (no scopes needed — public repo access only), the limit is 5000/hr. You can also pass `SPARTAN_CACHE_TTL_HOURS` and other config variables in the `env` block.
 
+### Alternative: Install from Source
+
+```bash
+git clone https://github.com/carlospalacin/spartan-ng-mcp.git
+cd spartan-ng-mcp
+npm install
+npm run build
+```
+
+When installing from source, replace `"command": "npx"` and `"args": ["-y", "spartan-ng-mcp"]` with `"command": "node"` and `"args": ["/absolute/path/to/spartan-ng-mcp/dist/index.js"]` in the IDE configurations above.
+
 ## Tools
 
 ### Discovery
 
-| Tool | Description |
-|------|-------------|
-| `spartan_list` | List all components and blocks. Filter by type or block category. |
-| `spartan_search` | Fuzzy search across components, blocks, and docs. Ranked results with scores. |
-| `spartan_view` | Detailed component view: Brain directives, Helm components, inputs/outputs, examples, install snippets. |
-| `spartan_dependencies` | Component dependency graph with direct, transitive, and reverse dependencies. |
+| Tool                   | Description                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- |
+| `spartan_list`         | List all components and blocks. Filter by type or block category.                                       |
+| `spartan_search`       | Fuzzy search across components, blocks, and docs. Ranked results with scores.                           |
+| `spartan_view`         | Detailed component view: Brain directives, Helm components, inputs/outputs, examples, install snippets. |
+| `spartan_dependencies` | Component dependency graph with direct, transitive, and reverse dependencies.                           |
 
 ### Source Code
 
-| Tool | Description |
-|------|-------------|
-| `spartan_source` | Fetch Brain/Helm TypeScript source code from GitHub. |
+| Tool                   | Description                                                          |
+| ---------------------- | -------------------------------------------------------------------- |
+| `spartan_source`       | Fetch Brain/Helm TypeScript source code from GitHub.                 |
 | `spartan_block_source` | Fetch block source code with shared utilities and extracted imports. |
 
 ### Documentation
 
-| Tool | Description |
-|------|-------------|
+| Tool           | Description                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------ |
 | `spartan_docs` | Fetch documentation topics: installation, CLI, theming, dark-mode, typography, figma, changelog. |
 
 ### Installation
 
-| Tool | Description |
-|------|-------------|
-| `spartan_install_command` | Generate `nx generate @spartan-ng/cli:ui` or `npm install` commands. Auto-detects package manager. |
-| `spartan_audit` | Post-installation checklist: Angular project, Tailwind, Spartan preset, Brain/Helm pairing, OnPush. |
-| `spartan_install_skills` | Install [spartan-ng-skills](https://github.com/jcpalaci/spartan-ng-skills) into a project's `.claude/skills/spartan/` directory. |
+| Tool                      | Description                                                                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `spartan_install_command` | Generate `nx generate @spartan-ng/cli:ui` or `npm install` commands. Auto-detects package manager.                                    |
+| `spartan_audit`           | Post-installation checklist: Angular project, Tailwind, Spartan preset, Brain/Helm pairing, OnPush.                                   |
+| `spartan_install_skills`  | Install [spartan-ng-skills](https://github.com/carlospalacin/spartan-ng-skills) into a project's `.claude/skills/spartan/` directory. |
 
 ### Project Context
 
-| Tool | Description |
-|------|-------------|
-| `spartan_project_info` | Detect Angular/Nx config, Tailwind version, installed packages, package manager, zoneless mode. |
-| `spartan_project_components` | List installed Brain/Helm packages with missing pair detection. |
+| Tool                         | Description                                                                                     |
+| ---------------------------- | ----------------------------------------------------------------------------------------------- |
+| `spartan_project_info`       | Detect Angular/Nx config, Tailwind version, installed packages, package manager, zoneless mode. |
+| `spartan_project_components` | List installed Brain/Helm packages with missing pair detection.                                 |
 
 ### Cache & Registry
 
-| Tool | Description |
-|------|-------------|
-| `spartan_cache` | Cache status, clear, or rebuild. Shows memory + file stats and GitHub rate limit. |
+| Tool                       | Description                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------- |
+| `spartan_cache`            | Cache status, clear, or rebuild. Shows memory + file stats and GitHub rate limit.        |
 | `spartan_registry_refresh` | Refresh registry from live Spartan Analog API. Reports added/updated/removed components. |
 
 ## Resources
 
 MCP resources provide direct data access via the `spartan://` URI scheme:
 
-| URI | Description |
-|-----|-------------|
-| `spartan://components/list` | All components with Brain/Helm availability |
-| `spartan://blocks/list` | All blocks grouped by category |
-| `spartan://project/info` | Registry metadata |
-| `spartan://component/{name}/api` | Brain & Helm API specs for a component |
-| `spartan://component/{name}/examples` | Code examples for a component |
+| URI                                   | Description                                 |
+| ------------------------------------- | ------------------------------------------- |
+| `spartan://components/list`           | All components with Brain/Helm availability |
+| `spartan://blocks/list`               | All blocks grouped by category              |
+| `spartan://project/info`              | Registry metadata                           |
+| `spartan://component/{name}/api`      | Brain & Helm API specs for a component      |
+| `spartan://component/{name}/examples` | Code examples for a component               |
 
 ## Prompts
 
 Pre-built workflow templates for common tasks:
 
-| Prompt | Description |
-|--------|-------------|
-| `spartan-get-started` | Installation + API overview + basic usage for any component |
-| `spartan-compare-layers` | Side-by-side Brain vs Helm API comparison |
-| `spartan-implement` | Step-by-step feature implementation guide |
-| `spartan-use-block` | Block integration guide with source fetching |
-| `spartan-migrate` | Version migration guide with Nx generators |
+| Prompt                   | Description                                                 |
+| ------------------------ | ----------------------------------------------------------- |
+| `spartan-get-started`    | Installation + API overview + basic usage for any component |
+| `spartan-compare-layers` | Side-by-side Brain vs Helm API comparison                   |
+| `spartan-implement`      | Step-by-step feature implementation guide                   |
+| `spartan-use-block`      | Block integration guide with source fetching                |
+| `spartan-migrate`        | Version migration guide with Nx generators                  |
 
 ## Architecture
 
@@ -223,7 +231,7 @@ Some Helm components wrap `@angular/cdk` directly instead of Brain (DropdownMenu
 
 ## Skills
 
-This MCP server is designed to work alongside [spartan-ng-skills](https://github.com/jcpalaci/spartan-ng-skills) — Claude Code skills that teach AI assistants how to correctly compose Spartan components.
+This MCP server is designed to work alongside [spartan-ng-skills](https://github.com/carlospalacin/spartan-ng-skills) — Claude Code skills that teach AI assistants how to correctly compose Spartan components.
 
 **MCP** provides the knowledge: what components exist, their APIs, source code.
 **Skills** provide the wisdom: how to use them correctly, composition rules, styling conventions.
@@ -239,6 +247,7 @@ cp -r /path/to/spartan-ng-skills/.claude /path/to/your-angular-project/
 ```
 
 The skills include 6 rule files with correct/incorrect Angular code pairs covering:
+
 - Brain vs Helm selection and `hostDirectives`
 - Component composition (Dialog, Card, Tabs, forms)
 - Styling with `hlm()`, `classes()`, CVA variants, semantic tokens
@@ -254,8 +263,8 @@ All settings are passed via the `env` block in your MCP configuration file (`.mc
 {
   "mcpServers": {
     "spartan-ng": {
-      "command": "node",
-      "args": ["/path/to/spartan-ng-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "spartan-ng-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_...",
         "SPARTAN_CACHE_TTL_HOURS": "48"
@@ -267,12 +276,12 @@ All settings are passed via the `env` block in your MCP configuration file (`.mc
 
 ### Available Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `GITHUB_TOKEN` | — | GitHub PAT for 5000 req/hr (60/hr without). No scopes required. |
-| `SPARTAN_CACHE_TTL_HOURS` | `24` | File cache TTL in hours |
-| `SPARTAN_CACHE_TTL_MS` | `300000` | In-memory cache TTL in ms (5 min) |
-| `SPARTAN_FETCH_TIMEOUT_MS` | `15000` | HTTP fetch timeout in ms |
+| Variable                   | Default  | Description                                                     |
+| -------------------------- | -------- | --------------------------------------------------------------- |
+| `GITHUB_TOKEN`             | —        | GitHub PAT for 5000 req/hr (60/hr without). No scopes required. |
+| `SPARTAN_CACHE_TTL_HOURS`  | `24`     | File cache TTL in hours                                         |
+| `SPARTAN_CACHE_TTL_MS`     | `300000` | In-memory cache TTL in ms (5 min)                               |
+| `SPARTAN_FETCH_TIMEOUT_MS` | `15000`  | HTTP fetch timeout in ms                                        |
 
 ### Updating the Registry
 
