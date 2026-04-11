@@ -20,6 +20,7 @@
     "start": "node dist/index.js",
     "generate-registry": "tsx scripts/generate-registry.ts",
     "mcp-client": "tsx scripts/mcp-client.ts",
+    "mcp-test": "tsx scripts/mcp-test-battery.ts",
     "prerelease": "npm run generate-registry && npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
