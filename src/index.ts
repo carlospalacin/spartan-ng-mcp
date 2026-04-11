@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import 'dotenv/config';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';

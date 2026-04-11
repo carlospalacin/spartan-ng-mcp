@@ -12,6 +12,7 @@
     "dev": "tsc --watch",
     "start": "node dist/index.js",
     "generate-registry": "tsx scripts/generate-registry.ts",
+    "mcp-client": "tsx scripts/mcp-client.ts",
     "prerelease": "npm run generate-registry && npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -46,6 +47,7 @@
     "@modelcontextprotocol/sdk": "^1.26.0",
     "cosmiconfig": "^9.0.0",
     "dedent": "^1.5.0",
+    "dotenv": "^17.4.1",
     "fuzzysort": "^3.1.0",
     "zod": "^3.24.0",
     "zod-to-json-schema": "^3.24.0"

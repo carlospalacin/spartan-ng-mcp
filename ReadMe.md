@@ -82,7 +82,18 @@ Add to `.vscode/mcp.json`:
 }
 ```
 
-> **Note:** The `GITHUB_TOKEN` is optional but recommended. Without it, GitHub API requests are limited to 60/hr. With a token (no scopes needed — public repo access only), the limit is 5000/hr. You can also pass `SPARTAN_CACHE_TTL_HOURS` and other config variables in the `env` block.
+> **Note:** The `GITHUB_TOKEN` is optional but recommended. Without it, GitHub API requests are limited to 60/hr. With a token (no scopes needed — public repo access only), the limit is 5000/hr.
+
+#### Using a `.env` file
+
+Instead of putting tokens in IDE config files (which may get committed to git), you can create a `.env` file in your project root:
+
+```env
+GITHUB_TOKEN=ghp_your_token_here
+SPARTAN_CACHE_TTL_HOURS=48
+```
+
+The MCP server loads `.env` automatically on startup. Make sure `.env` is in your `.gitignore`.
 
 ### Alternative: Install from Source
 
