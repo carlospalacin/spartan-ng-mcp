@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1775893295639" clover="3.2.0">
+  <project timestamp="1775893295639" name="All files">
+    <metrics statements="556" coveredstatements="539" conditionals="355" coveredconditionals="284" methods="103" coveredmethods="97" elements="1014" coveredelements="920" complexity="0" loc="556" ncloc="556" packages="8" files="15" classes="15"/>
+    <package name="src">
+      <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="5" coveredmethods="5"/>
+      <file name="server.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/server.ts">
+        <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="5" coveredmethods="5"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="35" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="47" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="5" type="stmt"/>
+        <line num="62" count="7" type="stmt"/>
+        <line num="63" count="7" type="stmt"/>
+        <line num="68" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.cache">
+      <metrics statements="98" coveredstatements="95" conditionals="51" coveredconditionals="45" methods="23" coveredmethods="23"/>
+      <file name="cache-manager.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/cache/cache-manager.ts">
+        <metrics statements="21" coveredstatements="19" conditionals="13" coveredconditionals="10" methods="6" coveredmethods="6"/>
+        <line num="10" count="9" type="stmt"/>
+        <line num="13" count="9" type="stmt"/>
+        <line num="14" count="9" type="stmt"/>
+        <line num="27" count="13" type="stmt"/>
+        <line num="30" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="12" type="stmt"/>
+        <line num="32" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="37" count="11" type="stmt"/>
+        <line num="38" count="11" type="cond" truecount="2" falsecount="3"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="45" count="12" type="stmt"/>
+        <line num="48" count="12" type="stmt"/>
+        <line num="49" count="12" type="stmt"/>
+        <line num="53" count="12" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+      </file>
+      <file name="file-cache.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/cache/file-cache.ts">
+        <metrics statements="51" coveredstatements="50" conditionals="24" coveredconditionals="22" methods="11" coveredmethods="11"/>
+        <line num="23" count="72" type="cond" truecount="4" falsecount="0"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="28" count="70" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="34" count="67" type="stmt"/>
+        <line num="38" count="48" type="stmt"/>
+        <line num="39" count="48" type="stmt"/>
+        <line num="40" count="48" type="cond" truecount="1" falsecount="1"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="55" count="23" type="stmt"/>
+        <line num="59" count="23" type="stmt"/>
+        <line num="60" count="23" type="stmt"/>
+        <line num="66" count="81" type="stmt"/>
+        <line num="70" count="47" type="stmt"/>
+        <line num="71" count="47" type="stmt"/>
+        <line num="72" count="47" type="stmt"/>
+        <line num="73" count="47" type="stmt"/>
+        <line num="77" count="21" type="stmt"/>
+        <line num="78" count="21" type="stmt"/>
+        <line num="79" count="21" type="stmt"/>
+        <line num="80" count="5" type="stmt"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="82" count="5" type="stmt"/>
+        <line num="83" count="5" type="stmt"/>
+        <line num="85" count="5" type="stmt"/>
+        <line num="87" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="92" count="16" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="103" count="26" type="stmt"/>
+        <line num="104" count="26" type="stmt"/>
+        <line num="105" count="26" type="stmt"/>
+        <line num="106" count="26" type="stmt"/>
+        <line num="107" count="22" type="stmt"/>
+        <line num="108" count="22" type="stmt"/>
+        <line num="110" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="111" count="1" type="stmt"/>
+        <line num="120" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="124" count="4" type="stmt"/>
+        <line num="125" count="4" type="stmt"/>
+        <line num="129" count="2" type="stmt"/>
+        <line num="133" count="2" type="stmt"/>
+        <line num="134" count="2" type="stmt"/>
+        <line num="135" count="2" type="stmt"/>
+        <line num="137" count="2" type="stmt"/>
+        <line num="138" count="8" type="stmt"/>
+        <line num="139" count="8" type="stmt"/>
+        <line num="140" count="8" type="stmt"/>
+        <line num="141" count="3" type="stmt"/>
+        <line num="142" count="2" type="stmt"/>
+        <line num="144" count="6" type="stmt"/>
+        <line num="148" count="2" type="stmt"/>
+      </file>
+      <file name="memory-cache.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/cache/memory-cache.ts">
+        <metrics statements="26" coveredstatements="26" conditionals="14" coveredconditionals="13" methods="6" coveredmethods="6"/>
+        <line num="9" count="20" type="stmt"/>
+        <line num="10" count="20" type="stmt"/>
+        <line num="11" count="20" type="stmt"/>
+        <line num="14" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="20" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="26" type="stmt"/>
+        <line num="20" count="26" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="17" type="stmt"/>
+        <line num="22" count="17" type="stmt"/>
+        <line num="25" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="37" count="27" type="cond" truecount="4" falsecount="0"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="44" count="27" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="52" count="5" type="stmt"/>
+        <line num="53" count="5" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.data">
+      <metrics statements="151" coveredstatements="145" conditionals="145" coveredconditionals="97" methods="28" coveredmethods="23"/>
+      <file name="analog-api.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/data/analog-api.ts">
+        <metrics statements="70" coveredstatements="70" conditionals="77" coveredconditionals="48" methods="14" coveredmethods="12"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="36" count="9" type="cond" truecount="5" falsecount="0"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="44" count="8" type="stmt"/>
+        <line num="45" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="52" count="7" type="stmt"/>
+        <line num="53" count="7" type="stmt"/>
+        <line num="55" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="66" count="6" type="stmt"/>
+        <line num="67" count="6" type="stmt"/>
+        <line num="68" count="6" type="stmt"/>
+        <line num="69" count="6" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="75" count="5" type="stmt"/>
+        <line num="76" count="5" type="stmt"/>
+        <line num="77" count="5" type="stmt"/>
+        <line num="79" count="5" type="stmt"/>
+        <line num="80" count="5" type="stmt"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="82" count="5" type="stmt"/>
+        <line num="84" count="5" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="106" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="108" count="4" type="stmt"/>
+        <line num="109" count="4" type="stmt"/>
+        <line num="112" count="4" type="stmt"/>
+        <line num="114" count="4" type="cond" truecount="4" falsecount="1"/>
+        <line num="115" count="4" type="stmt"/>
+        <line num="116" count="4" type="stmt"/>
+        <line num="127" count="4" type="stmt"/>
+        <line num="134" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="136" count="4" type="stmt"/>
+        <line num="137" count="4" type="stmt"/>
+        <line num="140" count="4" type="stmt"/>
+        <line num="142" count="4" type="cond" truecount="4" falsecount="1"/>
+        <line num="143" count="4" type="stmt"/>
+        <line num="144" count="4" type="stmt"/>
+        <line num="154" count="4" type="stmt"/>
+        <line num="158" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="159" count="8" type="stmt"/>
+        <line num="168" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="169" count="8" type="stmt"/>
+        <line num="177" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="178" count="4" type="stmt"/>
+        <line num="186" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="188" count="4" type="stmt"/>
+        <line num="189" count="4" type="stmt"/>
+        <line num="191" count="4" type="stmt"/>
+        <line num="192" count="8" type="cond" truecount="4" falsecount="0"/>
+        <line num="193" count="4" type="stmt"/>
+        <line num="198" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="199" count="4" type="stmt"/>
+        <line num="200" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="201" count="4" type="stmt"/>
+        <line num="210" count="4" type="stmt"/>
+        <line num="216" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="218" count="4" type="stmt"/>
+        <line num="220" count="4" type="stmt"/>
+        <line num="221" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="222" count="4" type="stmt"/>
+        <line num="226" count="4" type="stmt"/>
+      </file>
+      <file name="github.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/data/github.ts">
+        <metrics statements="81" coveredstatements="75" conditionals="68" coveredconditionals="49" methods="14" coveredmethods="11"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="25" count="11" type="stmt"/>
+        <line num="29" count="11" type="stmt"/>
+        <line num="30" count="11" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="11" type="stmt"/>
+        <line num="38" count="11" type="cond" truecount="2" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="42" count="11" type="stmt"/>
+        <line num="43" count="11" type="stmt"/>
+        <line num="45" count="11" type="stmt"/>
+        <line num="46" count="11" type="stmt"/>
+        <line num="52" count="9" type="stmt"/>
+        <line num="53" count="9" type="stmt"/>
+        <line num="54" count="9" type="stmt"/>
+        <line num="55" count="9" type="cond" truecount="1" falsecount="1"/>
+        <line num="56" count="9" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="9" type="cond" truecount="1" falsecount="1"/>
+        <line num="59" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="66" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="75" count="6" type="stmt"/>
+        <line num="77" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="79" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="93" count="11" type="stmt"/>
+        <line num="98" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="104" count="5" type="stmt"/>
+        <line num="111" count="18" type="stmt"/>
+        <line num="112" count="18" type="stmt"/>
+        <line num="115" count="12" type="stmt"/>
+        <line num="116" count="12" type="stmt"/>
+        <line num="117" count="12" type="stmt"/>
+        <line num="118" count="3" type="stmt"/>
+        <line num="120" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="121" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="128" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="130" count="12" type="stmt"/>
+        <line num="139" count="3" type="stmt"/>
+        <line num="140" count="3" type="stmt"/>
+        <line num="141" count="3" type="stmt"/>
+        <line num="142" count="3" type="stmt"/>
+        <line num="144" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="151" count="4" type="stmt"/>
+        <line num="161" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="162" count="1" type="stmt"/>
+        <line num="165" count="1" type="stmt"/>
+        <line num="166" count="1" type="stmt"/>
+        <line num="167" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="171" count="1" type="stmt"/>
+        <line num="172" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="173" count="1" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="183" count="1" type="stmt"/>
+        <line num="184" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="187" count="0" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="198" count="3" type="stmt"/>
+        <line num="199" count="3" type="stmt"/>
+        <line num="201" count="3" type="stmt"/>
+        <line num="202" count="3" type="stmt"/>
+        <line num="204" count="3" type="stmt"/>
+        <line num="205" count="3" type="stmt"/>
+        <line num="210" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="217" count="1" type="stmt"/>
+        <line num="219" count="2" type="stmt"/>
+        <line num="224" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.errors">
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <file name="errors.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/errors/errors.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="1" count="9" type="stmt"/>
+        <line num="45" count="49" type="stmt"/>
+        <line num="46" count="49" type="stmt"/>
+        <line num="47" count="49" type="stmt"/>
+        <line num="48" count="49" type="stmt"/>
+        <line num="49" count="49" type="stmt"/>
+        <line num="50" count="49" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="93" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.project">
+      <metrics statements="104" coveredstatements="104" conditionals="80" coveredconditionals="69" methods="10" coveredmethods="10"/>
+      <file name="detector.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/project/detector.ts">
+        <metrics statements="104" coveredstatements="104" conditionals="80" coveredconditionals="69" methods="10" coveredmethods="10"/>
+        <line num="7" count="141" type="stmt"/>
+        <line num="8" count="141" type="stmt"/>
+        <line num="9" count="14" type="stmt"/>
+        <line num="11" count="127" type="stmt"/>
+        <line num="16" count="63" type="stmt"/>
+        <line num="17" count="63" type="stmt"/>
+        <line num="18" count="23" type="stmt"/>
+        <line num="20" count="40" type="stmt"/>
+        <line num="25" count="180" type="stmt"/>
+        <line num="26" count="180" type="stmt"/>
+        <line num="28" count="177" type="stmt"/>
+        <line num="33" count="21" type="stmt"/>
+        <line num="34" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="17" type="stmt"/>
+        <line num="42" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="22" type="stmt"/>
+        <line num="46" count="22" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="54" count="21" type="stmt"/>
+        <line num="55" count="21" type="stmt"/>
+        <line num="61" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="66" count="22" type="stmt"/>
+        <line num="67" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="68" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="71" count="22" type="stmt"/>
+        <line num="72" count="21" type="stmt"/>
+        <line num="73" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="74" count="3" type="stmt"/>
+        <line num="75" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="77" count="3" type="stmt"/>
+        <line num="78" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="79" count="2" type="stmt"/>
+        <line num="85" count="21" type="stmt"/>
+        <line num="86" count="21" type="stmt"/>
+        <line num="90" count="21" type="stmt"/>
+        <line num="91" count="41" type="stmt"/>
+        <line num="92" count="41" type="cond" truecount="2" falsecount="0"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="99" count="21" type="stmt"/>
+        <line num="102" count="21" type="stmt"/>
+        <line num="103" count="21" type="stmt"/>
+        <line num="104" count="21" type="stmt"/>
+        <line num="105" count="3" type="cond" truecount="3" falsecount="0"/>
+        <line num="107" count="21" type="cond" truecount="1" falsecount="1"/>
+        <line num="110" count="21" type="stmt"/>
+        <line num="111" count="21" type="stmt"/>
+        <line num="112" count="21" type="stmt"/>
+        <line num="114" count="21" type="stmt"/>
+        <line num="120" count="81" type="stmt"/>
+        <line num="121" count="81" type="stmt"/>
+        <line num="122" count="81" type="cond" truecount="2" falsecount="0"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="124" count="1" type="stmt"/>
+        <line num="125" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
+        <line num="133" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="134" count="20" type="stmt"/>
+        <line num="139" count="20" type="stmt"/>
+        <line num="140" count="58" type="stmt"/>
+        <line num="141" count="58" type="cond" truecount="4" falsecount="0"/>
+        <line num="142" count="1" type="stmt"/>
+        <line num="143" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="144" count="1" type="stmt"/>
+        <line num="146" count="1" type="stmt"/>
+        <line num="152" count="21" type="cond" truecount="4" falsecount="0"/>
+        <line num="153" count="2" type="stmt"/>
+        <line num="154" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="158" count="21" type="stmt"/>
+        <line num="161" count="21" type="stmt"/>
+        <line num="163" count="21" type="stmt"/>
+        <line num="185" count="21" type="stmt"/>
+        <line num="186" count="21" type="stmt"/>
+        <line num="189" count="21" type="stmt"/>
+        <line num="190" count="27" type="cond" truecount="2" falsecount="0"/>
+        <line num="191" count="2" type="stmt"/>
+        <line num="192" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="193" count="1" type="stmt"/>
+        <line num="198" count="21" type="cond" truecount="4" falsecount="0"/>
+        <line num="199" count="20" type="stmt"/>
+        <line num="200" count="20" type="stmt"/>
+        <line num="201" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="202" count="2" type="stmt"/>
+        <line num="203" count="2" type="stmt"/>
+        <line num="204" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="205" count="1" type="stmt"/>
+        <line num="206" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="207" count="1" type="stmt"/>
+        <line num="216" count="20" type="stmt"/>
+        <line num="217" count="20" type="stmt"/>
+        <line num="218" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="219" count="1" type="stmt"/>
+        <line num="220" count="1" type="stmt"/>
+        <line num="221" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="222" count="1" type="stmt"/>
+        <line num="223" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="224" count="1" type="stmt"/>
+        <line num="234" count="21" type="stmt"/>
+        <line num="240" count="5" type="stmt"/>
+        <line num="241" count="5" type="cond" truecount="1" falsecount="2"/>
+      </file>
+    </package>
+    <package name="src.registry">
+      <metrics statements="69" coveredstatements="61" conditionals="26" coveredconditionals="21" methods="19" coveredmethods="19"/>
+      <file name="registry.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/registry/registry.ts">
+        <metrics statements="66" coveredstatements="58" conditionals="26" coveredconditionals="21" methods="19" coveredmethods="19"/>
+        <line num="18" count="21" type="stmt"/>
+        <line num="20" count="21" type="stmt"/>
+        <line num="24" count="20" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="20" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="58" count="20" type="stmt"/>
+        <line num="59" count="20" type="stmt"/>
+        <line num="60" count="19" type="stmt"/>
+        <line num="61" count="19" type="stmt"/>
+        <line num="63" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="87" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="92" count="18" type="stmt"/>
+        <line num="96" count="4" type="stmt"/>
+        <line num="97" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="106" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="111" count="2" type="stmt"/>
+        <line num="112" count="2" type="stmt"/>
+        <line num="113" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="117" count="1" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="126" count="2" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
+        <line num="143" count="2" type="stmt"/>
+        <line num="149" count="1" type="stmt"/>
+        <line num="153" count="2" type="stmt"/>
+        <line num="154" count="2" type="stmt"/>
+        <line num="155" count="2" type="stmt"/>
+        <line num="156" count="2" type="stmt"/>
+        <line num="160" count="1" type="stmt"/>
+        <line num="164" count="1" type="stmt"/>
+        <line num="168" count="1" type="stmt"/>
+        <line num="172" count="2" type="stmt"/>
+        <line num="176" count="1" type="stmt"/>
+        <line num="188" count="1" type="stmt"/>
+        <line num="189" count="1" type="stmt"/>
+        <line num="190" count="1" type="stmt"/>
+        <line num="192" count="2" type="stmt"/>
+        <line num="193" count="2" type="stmt"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="196" count="1" type="stmt"/>
+        <line num="197" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="199" count="1" type="stmt"/>
+        <line num="200" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="201" count="1" type="stmt"/>
+        <line num="206" count="1" type="stmt"/>
+        <line num="207" count="1" type="stmt"/>
+      </file>
+      <file name="schema.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/registry/schema.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.search">
+      <metrics statements="2" coveredstatements="2" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="fuzzy.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/search/fuzzy.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="10" count="7" type="stmt"/>
+        <line num="16" count="18" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="103" coveredstatements="103" conditionals="44" coveredconditionals="43" methods="10" coveredmethods="9"/>
+      <file name="constants.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/utils/constants.ts">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+      </file>
+      <file name="fetch.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/utils/fetch.ts">
+        <metrics statements="23" coveredstatements="23" conditionals="24" coveredconditionals="24" methods="2" coveredmethods="1"/>
+        <line num="11" count="25" type="cond" truecount="3" falsecount="0"/>
+        <line num="13" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="24" type="stmt"/>
+        <line num="15" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="18" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="21" type="cond" truecount="4" falsecount="0"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="18" type="stmt"/>
+        <line num="30" count="18" type="stmt"/>
+        <line num="32" count="18" type="stmt"/>
+        <line num="33" count="18" type="stmt"/>
+        <line num="41" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="48" count="11" type="stmt"/>
+        <line num="50" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="66" count="18" type="stmt"/>
+      </file>
+      <file name="html.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/utils/html.ts">
+        <metrics statements="31" coveredstatements="31" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
+        <line num="17" count="23" type="stmt"/>
+        <line num="19" count="23" type="stmt"/>
+        <line num="20" count="23" type="stmt"/>
+        <line num="22" count="23" type="stmt"/>
+        <line num="23" count="23" type="stmt"/>
+        <line num="25" count="23" type="stmt"/>
+        <line num="27" count="23" type="stmt"/>
+        <line num="35" count="23" type="stmt"/>
+        <line num="36" count="23" type="stmt"/>
+        <line num="37" count="23" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="43" count="5" type="stmt"/>
+        <line num="46" count="5" type="stmt"/>
+        <line num="47" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="5" type="stmt"/>
+        <line num="49" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="63" count="4" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="73" count="5" type="stmt"/>
+        <line num="74" count="5" type="stmt"/>
+        <line num="77" count="5" type="stmt"/>
+        <line num="78" count="5" type="stmt"/>
+        <line num="79" count="5" type="stmt"/>
+        <line num="80" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="81" count="4" type="stmt"/>
+        <line num="85" count="5" type="stmt"/>
+      </file>
+      <file name="imports.ts" path="/Users/carlos/Projects/aurora/spartan-ng-mcp/src/utils/imports.ts">
+        <metrics statements="35" coveredstatements="35" conditionals="12" coveredconditionals="11" methods="4" coveredmethods="4"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="10" count="11" type="stmt"/>
+        <line num="11" count="11" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
+        <line num="14" count="11" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
+        <line num="18" count="15" type="stmt"/>
+        <line num="20" count="20" type="stmt"/>
+        <line num="22" count="15" type="stmt"/>
+        <line num="24" count="15" type="stmt"/>
+        <line num="25" count="20" type="stmt"/>
+        <line num="26" count="20" type="cond" truecount="1" falsecount="1"/>
+        <line num="28" count="20" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="7" type="stmt"/>
+        <line num="30" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="7" type="stmt"/>
+        <line num="34" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="40" count="11" type="stmt"/>
+        <line num="49" count="5" type="stmt"/>
+        <line num="52" count="5" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="59" count="5" type="stmt"/>
+        <line num="60" count="5" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="71" count="5" type="stmt"/>
+        <line num="72" count="5" type="stmt"/>
+        <line num="73" count="6" type="stmt"/>
+        <line num="76" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
