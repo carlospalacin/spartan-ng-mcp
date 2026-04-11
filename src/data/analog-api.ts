@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { SpartanError, SpartanErrorCode } from '../errors/errors.js';
 import {
   ANALOG_API_TIMEOUT_MS,
@@ -16,6 +17,15 @@ import type {
   HelmComponent,
 } from './types.js';
 
+/** Maximum size of the Analog API response body (10 MB) */
+const MAX_API_RESPONSE_SIZE = 10 * 1024 * 1024;
+
+const analogResponseSchema = z.object({
+  docsData: z.record(z.unknown()),
+  primitivesData: z.record(z.unknown()),
+  manualInstallSnippets: z.record(z.unknown()).optional(),
+});
+
 // In-memory cache for the bulk Analog API response (30 min TTL)
 let _apiCache: AnalogAPIResponse | null = null;
 let _apiCacheTimestamp = 0;
@@ -31,20 +41,29 @@ export class AnalogApiClient {
       timeoutMs: ANALOG_API_TIMEOUT_MS,
     });
 
-    const data = (await response.json()) as Record<string, unknown>;
-
-    if (!data.docsData || !data.primitivesData) {
+    const text = await response.text();
+    if (text.length > MAX_API_RESPONSE_SIZE) {
       throw new SpartanError(
-        'Analog API returned unexpected shape — missing docsData or primitivesData',
+        `Analog API response too large (${(text.length / 1024 / 1024).toFixed(1)} MB)`,
+        { code: SpartanErrorCode.VALIDATION_ERROR },
+      );
+    }
+
+    const data: unknown = JSON.parse(text);
+    const parsed = analogResponseSchema.safeParse(data);
+
+    if (!parsed.success) {
+      throw new SpartanError(
+        'Analog API returned unexpected shape — schema validation failed',
         {
           code: SpartanErrorCode.API_SCHEMA_CHANGED,
           suggestion: 'The spartan.ng API may have changed. Check if the MCP needs an update.',
-          context: { keys: Object.keys(data) },
+          context: { issues: parsed.error.issues.map((i) => i.message) },
         },
       );
     }
 
-    const result = data as unknown as AnalogAPIResponse;
+    const result = parsed.data as AnalogAPIResponse;
     _apiCache = result;
     _apiCacheTimestamp = Date.now();
     return result;

@@ -1,5 +1,6 @@
 import { access, readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
+import { SpartanError, SpartanErrorCode } from '../errors/errors.js';
 import type { SpartanProjectContext } from './types.js';
 
 async function fileExists(path: string): Promise<boolean> {
@@ -38,7 +39,16 @@ function detectPackageManager(rootDir: string): Promise<SpartanProjectContext['p
 }
 
 export async function detectProject(cwd?: string): Promise<SpartanProjectContext> {
-  const rootDir = cwd ?? process.cwd();
+  const rootDir = resolve(cwd ?? process.cwd());
+
+  // Validate the directory exists and looks like a project
+  try {
+    await access(rootDir);
+  } catch {
+    throw new SpartanError(`Directory does not exist: ${rootDir}`, {
+      code: SpartanErrorCode.VALIDATION_ERROR,
+    });
+  }
 
   // Read package.json
   const pkg = await readJsonSafe(join(rootDir, 'package.json'));

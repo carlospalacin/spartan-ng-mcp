@@ -12,6 +12,15 @@ export async function safeFetch(url: string, options: FetchOptions = {}): Promis
 
   if (!skipSsrfCheck) {
     const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') {
+      throw ssrfViolation(url, parsed.hostname);
+    }
+    if (parsed.port !== '') {
+      throw ssrfViolation(url, parsed.hostname);
+    }
+    if (parsed.username || parsed.password) {
+      throw ssrfViolation(url, parsed.hostname);
+    }
     if (!ALLOWED_HOSTS.includes(parsed.hostname)) {
       throw ssrfViolation(url, parsed.hostname);
     }

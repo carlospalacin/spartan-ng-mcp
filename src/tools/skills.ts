@@ -1,9 +1,10 @@
 import { execFile } from 'node:child_process';
 import { access, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { z } from 'zod';
+import { SpartanError, SpartanErrorCode } from '../errors/errors.js';
 import type { ToolDefinition } from '../server.js';
 
 const execFileAsync = promisify(execFile);
@@ -73,7 +74,18 @@ export function createSkillsTools(): ToolDefinition[] {
           .describe('Target project directory (defaults to current working directory)'),
       },
       handler: async (args: { cwd?: string }) => {
-        const targetRoot = args.cwd ?? process.cwd();
+        const targetRoot = resolve(args.cwd ?? process.cwd());
+
+        // Validate the target is a real project directory
+        try {
+          await access(join(targetRoot, 'package.json'));
+        } catch {
+          throw new SpartanError(
+            `Target directory does not appear to be a project (no package.json): ${targetRoot}`,
+            { code: SpartanErrorCode.VALIDATION_ERROR },
+          );
+        }
+
         const targetDir = join(targetRoot, '.claude', 'skills', 'spartan');
 
         // Try local source first, then clone from GitHub

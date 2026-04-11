@@ -8,6 +8,13 @@ import {
 } from '../utils/constants.js';
 import type { GitHubEntry, GitHubFile, RateLimitInfo, SourceFile } from './types.js';
 
+/** Maximum file size to decode (5 MB) */
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+/** Maximum recursion depth for directory traversal */
+const MAX_DIR_DEPTH = 5;
+/** Maximum total files to fetch in a single directory traversal */
+const MAX_DIR_FILES = 100;
+
 const rateLimitInfo = {
   limit: 60,
   remaining: 60,
@@ -87,26 +94,49 @@ async function githubFetch(url: string): Promise<Response> {
   }
 }
 
+function assertSafePath(filePath: string): void {
+  if (
+    filePath.includes('..') ||
+    filePath.startsWith('/') ||
+    filePath.includes('\\') ||
+    filePath.includes('\0')
+  ) {
+    throw new SpartanError('Invalid file path: must not contain traversal sequences', {
+      code: SpartanErrorCode.VALIDATION_ERROR,
+    });
+  }
+}
+
 export class GitHubClient {
   private readonly repo = SPARTAN_REPO;
   private readonly branch = SPARTAN_REPO_BRANCH;
 
   async fetchFile(filePath: string): Promise<GitHubFile> {
+    assertSafePath(filePath);
     const url = `${GITHUB_API_BASE}/repos/${this.repo}/contents/${filePath}?ref=${this.branch}`;
     const res = await githubFetch(url);
     const json = (await res.json()) as Record<string, unknown>;
+
+    const size = Number(json.size ?? 0);
+    if (size > MAX_FILE_SIZE_BYTES) {
+      throw new SpartanError(
+        `File too large (${(size / 1024 / 1024).toFixed(1)} MB). Max: ${MAX_FILE_SIZE_BYTES / 1024 / 1024} MB.`,
+        { code: SpartanErrorCode.VALIDATION_ERROR, context: { filePath, size } },
+      );
+    }
 
     const content = Buffer.from(String(json.content ?? ''), 'base64').toString('utf-8');
 
     return {
       content,
       sha: String(json.sha ?? ''),
-      size: Number(json.size ?? 0),
+      size,
       path: String(json.path ?? filePath),
     };
   }
 
   async fetchDirectory(dirPath: string): Promise<GitHubEntry[]> {
+    assertSafePath(dirPath);
     const url = `${GITHUB_API_BASE}/repos/${this.repo}/contents/${dirPath}?ref=${this.branch}`;
     const res = await githubFetch(url);
     const json = (await res.json()) as Array<Record<string, unknown>>;
@@ -127,7 +157,11 @@ export class GitHubClient {
     }));
   }
 
-  async fetchDirectoryFiles(dirPath: string): Promise<SourceFile[]> {
+  async fetchDirectoryFiles(dirPath: string, depth = 0): Promise<SourceFile[]> {
+    if (depth > MAX_DIR_DEPTH) {
+      return [];
+    }
+
     const entries = await this.fetchDirectory(dirPath);
     const tsFiles = entries.filter(
       (e) => e.type === 'file' && (e.name.endsWith('.ts') || e.name.endsWith('.js')),
@@ -135,6 +169,7 @@ export class GitHubClient {
 
     const files: SourceFile[] = [];
     for (const file of tsFiles) {
+      if (files.length >= MAX_DIR_FILES) break;
       const result = await this.fetchFile(file.path);
       files.push({
         name: file.name,
@@ -146,7 +181,8 @@ export class GitHubClient {
     // Recurse into subdirectories
     const dirs = entries.filter((e) => e.type === 'dir');
     for (const dir of dirs) {
-      const subFiles = await this.fetchDirectoryFiles(dir.path);
+      if (files.length >= MAX_DIR_FILES) break;
+      const subFiles = await this.fetchDirectoryFiles(dir.path, depth + 1);
       files.push(
         ...subFiles.map((f) => ({
           ...f,
@@ -159,6 +195,7 @@ export class GitHubClient {
   }
 
   async fetchRaw(filePath: string): Promise<string> {
+    assertSafePath(filePath);
     const url = `${GITHUB_RAW_BASE}/${this.repo}/${this.branch}/${filePath}`;
 
     const controller = new AbortController();

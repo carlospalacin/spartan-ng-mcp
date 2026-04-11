@@ -43,11 +43,13 @@ function wrapHandler(handler: ToolDefinition['handler']): ToolDefinition['handle
         };
       }
 
+      const safeMessage =
+        error instanceof Error ? error.message : 'An unexpected internal error occurred';
       return {
         content: [
           {
             type: 'text' as const,
-            text: `Unexpected error: ${String(error)}`,
+            text: `Unexpected error: ${safeMessage}`,
           },
         ],
         isError: true,
