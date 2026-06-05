@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "generatedAt": "2026-04-10T20:40:04.075Z",
+  "version": "2.0.5",
+  "generatedAt": "2026-06-05T11:51:07.923Z",
   "spartanVersion": "latest",
   "components": {
     "accordion": {
@@ -108,7 +108,6 @@
         "BrnAutocompleteContent",
         "BrnAutocompleteEmpty",
         "BrnAutocompleteGroup",
-        "BrnAutocompleteInputWrapper",
         "BrnAutocompleteInput",
         "BrnAutocompleteItem",
         "BrnAutocompleteLabel",
@@ -367,7 +366,6 @@
         "BrnComboboxContent",
         "BrnComboboxEmpty",
         "BrnComboboxGroup",
-        "BrnComboboxInputWrapper",
         "BrnComboboxInput",
         "BrnComboboxItem",
         "BrnComboboxLabel",
@@ -961,7 +959,6 @@
         "BrnSelectScrollDown",
         "BrnSelectScrollUp",
         "BrnSelectSeparator",
-        "BrnSelectTriggerWrapper",
         "BrnSelectTrigger",
         "BrnSelectValueTemplate",
         "BrnSelectValue",
