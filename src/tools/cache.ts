@@ -3,7 +3,7 @@ import type { CacheManager } from '../cache/cache-manager.js';
 import type { AnalogApiClient } from '../data/analog-api.js';
 import type { GitHubClient } from '../data/github.js';
 import type { RegistryLoader } from '../registry/registry.js';
-import { spartanRegistrySchema } from '../registry/schema.js';
+import { buildRefreshedRegistry } from '../registry/refresh.js';
 import type { ToolDefinition } from '../server.js';
 
 export function createCacheTools(
@@ -35,6 +35,10 @@ export function createCacheTools(
         if (args.action === 'status') {
           const stats = await cacheManager.stats();
           const rateLimit = github.getRateLimit();
+          const lastRefreshedAt = registry.getLastRefreshedAt();
+          const ttlMs = cacheManager.ttlMs();
+          const lastRefreshedMs = lastRefreshedAt ? Date.parse(lastRefreshedAt) : 0;
+          const timeUntilStaleMs = Math.max(0, ttlMs - (Date.now() - lastRefreshedMs));
 
           return {
             content: [
@@ -46,10 +50,14 @@ export function createCacheTools(
                     registry: {
                       version: registry.getVersion(),
                       spartanVersion: registry.getSpartanVersion(),
-                      generatedAt: registry.getGeneratedAt(),
+                      generatedAt: registry.getGeneratedAt(), // build-time, informational only
+                      lastRefreshedAt,
+                      cacheFile: cacheManager.getRegistryCachePath(),
+                      ttlHours: ttlMs / (60 * 60 * 1000),
+                      timeUntilStaleMs,
+                      isStale: registry.isStale(),
                       componentCount: registry.getComponentCount(),
                       blockCount: registry.getBlockCount(),
-                      isStale: registry.isStale(),
                     },
                     github: {
                       rateLimit: rateLimit.limit,
@@ -145,48 +153,16 @@ export function createCacheTools(
           };
         }
 
-        // Fetch fresh data from Analog API
+        // Fetch fresh data and rebuild with the shared categorization map (fidelity
+        // preserved — never `misc`-flattened), preserving blocks/docs, then persist
+        // atomically to the writable cache file.
+        const nowIso = new Date().toISOString();
         const apiData = await analogApi.fetchAll(true);
-        const componentNames = Object.keys(apiData.docsData).sort();
+        const newRegistry = buildRefreshedRegistry(apiData, registry.getCurrentRegistry(), nowIso);
 
-        // Build new registry components
-        const components: Record<string, unknown> = {};
-        for (const name of componentNames) {
-          const docs = apiData.docsData[name] as Record<string, unknown>;
-          const brainSection = docs?.brain as Record<string, unknown> | undefined;
-          const helmSection = docs?.helm as Record<string, unknown> | undefined;
-          const brainDirectives = brainSection ? Object.keys(brainSection) : [];
-          const helmComponents = helmSection ? Object.keys(helmSection) : [];
-
-          components[name] = {
-            name,
-            brainAvailable: brainDirectives.length > 0,
-            helmAvailable: helmComponents.length > 0 || brainDirectives.length === 0,
-            brainPackage: `@spartan-ng/brain/${name}`,
-            helmPackage: `@spartan-ng/helm/${name}`,
-            brainDirectives,
-            helmComponents,
-            category: 'misc', // Simplified — full categorization in generator script
-            peerDependencies: ['@angular/cdk'],
-            url: `https://www.spartan.ng/components/${name}`,
-          };
-        }
-
-        // Preserve existing blocks and docs from current registry
-        const currentBlocks = Object.fromEntries(
-          registry.listBlocks().map((b) => [`${b.category}/${b.variant}`, b]),
-        );
-
-        const newRegistry = spartanRegistrySchema.parse({
-          version: registry.getVersion(),
-          generatedAt: new Date().toISOString(),
-          spartanVersion: 'latest',
-          components,
-          blocks: currentBlocks,
-          docs: registry.listDocs(),
-        });
-
+        await cacheManager.writeRegistryCache(newRegistry, nowIso);
         const diff = registry.updateRegistry(newRegistry);
+        registry.setLastRefreshedAt(nowIso);
 
         return {
           content: [
@@ -207,7 +183,9 @@ export function createCacheTools(
                     updatedCount: diff.updated.length,
                     removedCount: diff.removed.length,
                   },
-                  note: "Registry updated in memory only. The committed registry.json is unchanged. Run 'npm run generate-registry' to persist.",
+                  lastRefreshedAt: nowIso,
+                  cacheFile: cacheManager.getRegistryCachePath(),
+                  note: 'Registry persisted to the writable cache file. The committed registry.json (packaged floor) is unchanged.',
                 },
                 null,
                 2,

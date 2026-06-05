@@ -17,9 +17,13 @@ export const ALLOWED_HOSTS = [
 ];
 
 export const DEFAULT_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes (in-memory)
-export const DEFAULT_CACHE_TTL_HOURS = 24; // 24 hours (file-based)
+export const DEFAULT_CACHE_TTL_HOURS = 24; // 24 hours (file-based + registry SWR window)
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000; // 15 seconds
 export const ANALOG_API_TIMEOUT_MS = 30_000; // 30 seconds (larger payload)
+
+// Persisted runtime registry cache (stale-while-revalidate)
+export const REGISTRY_CACHE_FILENAME = 'registry.cache.json';
+export const REGISTRY_REFRESH_LOCK_FILENAME = 'registry.refresh.lock';
 
 export const DOCUMENTATION_TOPICS = [
   'installation',

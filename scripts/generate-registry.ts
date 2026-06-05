@@ -10,6 +10,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { categorize } from '../src/registry/categorize.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -85,52 +86,6 @@ const HELM_ONLY = new Set([
 
 // Components that use CDK directly instead of Brain
 const CDK_BASED = new Set(['dropdown-menu', 'context-menu', 'menubar']);
-
-// Category mapping
-function categorize(name: string): string {
-  const categories: Record<string, string[]> = {
-    form: [
-      'input',
-      'textarea',
-      'select',
-      'native-select',
-      'checkbox',
-      'radio-group',
-      'switch',
-      'slider',
-      'combobox',
-      'autocomplete',
-      'input-otp',
-      'input-group',
-      'field',
-      'form-field',
-      'label',
-      'calendar',
-      'date-picker',
-    ],
-    action: ['button', 'button-group', 'toggle', 'toggle-group'],
-    layout: [
-      'card',
-      'separator',
-      'resizable',
-      'scroll-area',
-      'aspect-ratio',
-      'accordion',
-      'collapsible',
-    ],
-    overlay: ['dialog', 'alert-dialog', 'sheet', 'popover', 'tooltip', 'hover-card'],
-    menu: ['dropdown-menu', 'context-menu', 'menubar', 'command'],
-    navigation: ['navigation-menu', 'tabs', 'breadcrumb', 'pagination', 'sidebar'],
-    'data-display': ['avatar', 'badge', 'table', 'data-table', 'carousel', 'item'],
-    feedback: ['alert', 'progress', 'skeleton', 'spinner', 'sonner', 'empty'],
-    typography: ['icon', 'kbd', 'typography'],
-  };
-
-  for (const [cat, names] of Object.entries(categories)) {
-    if (names.includes(name)) return cat;
-  }
-  return 'misc';
-}
 
 interface AnalogAPIData {
   docsData: Record<

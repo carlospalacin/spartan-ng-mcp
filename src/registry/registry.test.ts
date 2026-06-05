@@ -2,6 +2,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { CacheManager } from '../cache/cache-manager.js';
 import { SpartanError } from '../errors/errors.js';
 import { RegistryLoader } from './registry.js';
 import type { SpartanRegistry } from './schema.js';
@@ -138,17 +139,28 @@ describe('RegistryLoader', () => {
       expect(items.some((i) => i.type === 'doc')).toBe(true);
     });
 
-    it('isStale returns false for fresh registry', () => {
+    it('isStale is true when never refreshed at runtime', () => {
+      expect(loader.isStale()).toBe(true);
+    });
+
+    it('isStale is false right after a runtime refresh', () => {
+      loader.setLastRefreshedAt(new Date().toISOString());
       expect(loader.isStale()).toBe(false);
     });
 
-    it('isStale returns true for old registry', async () => {
-      const oldDate = new Date(Date.now() - 200 * 60 * 60 * 1000).toISOString();
-      const filePath = join(tempDir, 'old.json');
-      await writeFile(filePath, JSON.stringify(makeRegistry({ generatedAt: oldDate })), 'utf-8');
-      const old = new RegistryLoader(filePath);
-      await old.initialize();
-      expect(old.isStale()).toBe(true);
+    it('isStale is true when the last runtime refresh is older than the TTL', () => {
+      loader.setLastRefreshedAt(new Date(Date.now() - 200 * 60 * 60 * 1000).toISOString());
+      expect(loader.isStale()).toBe(true);
+    });
+
+    it('build-time generatedAt does not drive staleness', async () => {
+      const oldGen = new Date(Date.now() - 500 * 60 * 60 * 1000).toISOString();
+      const filePath = join(tempDir, 'oldgen.json');
+      await writeFile(filePath, JSON.stringify(makeRegistry({ generatedAt: oldGen })), 'utf-8');
+      const l = new RegistryLoader(filePath);
+      await l.initialize();
+      l.setLastRefreshedAt(new Date().toISOString());
+      expect(l.isStale()).toBe(false);
     });
 
     it('getVersion returns version', () => {
@@ -184,5 +196,57 @@ describe('RegistryLoader', () => {
       expect(diff.removed).toContain('dialog');
       expect(diff.updated).toContain('button');
     });
+  });
+});
+
+describe('RegistryLoader load precedence', () => {
+  let tempDir: string;
+  let cacheManager: CacheManager;
+
+  beforeEach(async () => {
+    tempDir = await mkdtemp(join(tmpdir(), 'spartan-prec-'));
+    cacheManager = new CacheManager(tempDir);
+  });
+
+  afterEach(async () => {
+    await rm(tempDir, { recursive: true, force: true });
+  });
+
+  it('prefers a schema-valid cache file over the packaged snapshot', async () => {
+    const reg = makeRegistry({
+      components: {
+        'zzz-only': { ...makeRegistry().components.button, name: 'zzz-only' },
+      },
+    });
+    await cacheManager.writeRegistryCache(reg, '2026-03-03T00:00:00.000Z');
+
+    const loader = new RegistryLoader(undefined, { cacheManager });
+    await loader.initialize();
+
+    expect(loader.getComponentCount()).toBe(1);
+    expect(loader.getComponent('zzz-only')).not.toBeNull();
+    expect(loader.getLastRefreshedAt()).toBe('2026-03-03T00:00:00.000Z');
+  });
+
+  it('falls back to the packaged snapshot when the cache file is invalid', async () => {
+    await writeFile(
+      cacheManager.getRegistryCachePath(),
+      JSON.stringify({ lastRefreshedAt: 'x', registry: { not: 'valid' } }),
+      'utf-8',
+    );
+
+    const loader = new RegistryLoader(undefined, { cacheManager });
+    await loader.initialize();
+
+    expect(loader.getComponentCount()).toBeGreaterThan(1);
+    expect(loader.getLastRefreshedAt()).toBeNull();
+  });
+
+  it('falls back to the packaged snapshot when there is no cache file', async () => {
+    const loader = new RegistryLoader(undefined, { cacheManager });
+    await loader.initialize();
+
+    expect(loader.getComponentCount()).toBeGreaterThan(1);
+    expect(loader.getLastRefreshedAt()).toBeNull();
   });
 });
