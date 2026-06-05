@@ -1,0 +1,67 @@
+name: Registry refresh
+
+# Build-time complement to the runtime SWR cache: keep the committed registry.json
+# floor fresh by regenerating it from the Spartan Analog API on a schedule and
+# surfacing meaningful drift as a reviewable PR. Merging that PR triggers release.yml.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: registry-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Regenerate registry from the Analog API
+        run: pnpm run generate-registry
+
+      - name: Detect meaningful drift (ignores generatedAt/version)
+        id: drift
+        run: node scripts/check-registry-drift.mjs
+
+      - name: Open or update the refresh PR
+        if: steps.drift.outputs.drifted == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/registry-refresh
+          base: main
+          add-paths: src/registry/registry.json
+          commit-message: 'chore(registry): refresh registry.json from Analog API'
+          title: 'chore(registry): refresh registry.json from Analog API'
+          labels: registry-refresh
+          delete-branch: true
+          body: |
+            Automated weekly registry refresh from the Spartan Analog API.
+
+            Only opened because **meaningful** content changed (components / blocks /
+            docs) — pure `generatedAt` churn is ignored.
+
+            Review the diff and merge to cut a minor release (handled by `release.yml`).
+
+      - name: No drift — discard regenerated timestamp
+        if: steps.drift.outputs.drifted != 'true'
+        run: |
+          echo "No meaningful drift; reverting the generatedAt-only change."
+          git checkout -- src/registry/registry.json

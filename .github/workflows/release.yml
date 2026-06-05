@@ -1,0 +1,94 @@
+name: Release
+
+# Triggered when a reviewed registry refresh lands on main. Cuts a minor,
+# provenance-signed npm release via OIDC trusted publishing, then tags + creates a
+# GitHub Release. Publishing is ordered BEFORE tagging so a failed publish leaves no
+# dangling tag/release.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/registry/registry.json'
+
+permissions:
+  contents: write # commit the bump, push, tag, create the release
+  id-token: write # OIDC trusted publishing
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    # Loop guard: never react to the release bot's own bump commit (which also carries
+    # [skip ci], so this is belt-and-suspenders).
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22 # OIDC trusted publishing needs Node >= 22.14
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      # npm trusted publishing (OIDC) requires npm CLI >= 11.5.1.
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@latest
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Bump minor version (no tag, no commit yet)
+        id: bump
+        run: |
+          pnpm version minor --no-git-tag-version
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Abort if this version is already on npm
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          PKG=$(node -p "require('./package.json').name")
+          if npm view "$PKG@$VERSION" version > /dev/null 2>&1; then
+            echo "::error::$PKG@$VERSION is already published — aborting to avoid colliding with the manual publish.sh lane."
+            exit 1
+          fi
+
+      # Build dist only — do NOT re-run generate-registry. The registry.json being
+      # released was already refreshed and reviewed in the merged PR; re-fetching here
+      # could publish newer, unreviewed upstream data.
+      - name: Build
+        run: pnpm run build
+
+      - name: Stamp registry version to match the release
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+        run: |
+          node -e "const fs=require('node:fs');const p='src/registry/registry.json';const r=JSON.parse(fs.readFileSync(p,'utf-8'));r.version=process.env.VERSION;fs.writeFileSync(p,JSON.stringify(r,null,2)+'\n');"
+
+      # OIDC: no NODE_AUTH_TOKEN, no --provenance flag (provenance is automatic for
+      # trusted publishing). Requires the npmjs trusted-publisher config for this repo.
+      - name: Publish to npm (OIDC trusted publishing)
+        run: npm publish --access public
+
+      - name: Commit bump, tag, push, and create the GitHub Release
+        env:
+          VERSION: ${{ steps.bump.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json pnpm-lock.yaml src/registry/registry.json
+          git commit -m "chore(release): v$VERSION [skip ci]"
+          git tag "v$VERSION"
+          git push origin HEAD:main
+          git push origin "v$VERSION"
+          gh release create "v$VERSION" \
+            --title "v$VERSION" \
+            --notes "Automated registry-refresh release. See the merged \`registry-refresh\` pull request for the component diff."
