@@ -1,5 +1,9 @@
 node_modules/
 dist/
 /cache/
+coverage/
 *.tsbuildinfo
 .DS_Store
+
+# Local skill-registry cache (generated; scans per-user skill dirs)
+.atl/
