@@ -83,5 +83,5 @@ When Spartan releases new components:
 Users can also call `spartan_registry_refresh` at runtime to pick up new components without updating the MCP.
 
 <!-- SKILLS-INDEX-START -->
-[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/conventional-commits:{SKILL.md}
+[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/conventional-commits:{SKILL.md}|skills/openspec-apply-change:{SKILL.md}|skills/openspec-archive-change:{SKILL.md}|skills/openspec-explore:{SKILL.md}|skills/openspec-propose:{SKILL.md}|commands:{apply.md,archive.md,explore.md,propose.md}
 <!-- SKILLS-INDEX-END -->
