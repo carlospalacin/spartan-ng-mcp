@@ -1,6 +1,6 @@
 {
   "version": "2.1.0",
-  "generatedAt": "2026-06-05T11:51:07.923Z",
+  "generatedAt": "2026-06-22T08:15:05.608Z",
   "spartanVersion": "latest",
   "components": {
     "accordion": {
@@ -68,6 +68,7 @@
         "HlmAlertDialogDescription",
         "HlmAlertDialogFooter",
         "HlmAlertDialogHeader",
+        "HlmAlertDialogMedia",
         "HlmAlertDialogOverlay",
         "HlmAlertDialogPortal",
         "HlmAlertDialogTitle",
@@ -469,7 +470,10 @@
       "helmPackage": "@spartan-ng/helm/date-picker",
       "brainDirectives": [],
       "helmComponents": [
+        "HlmDatePickerAnchor",
+        "HlmDatePickerInput",
         "HlmDatePickerMulti",
+        "HlmDatePickerTrigger",
         "HlmDatePicker",
         "HlmDateRangePicker"
       ],
@@ -512,6 +516,40 @@
       ],
       "url": "https://www.spartan.ng/components/dialog"
     },
+    "drawer": {
+      "name": "drawer",
+      "brainAvailable": true,
+      "helmAvailable": true,
+      "brainPackage": "@spartan-ng/brain/drawer",
+      "helmPackage": "@spartan-ng/helm/drawer",
+      "brainDirectives": [
+        "BrnDrawerClose",
+        "BrnDrawerContent",
+        "BrnDrawerDescription",
+        "BrnDrawerHandle",
+        "BrnDrawerOverlay",
+        "BrnDrawerTitle",
+        "BrnDrawerTrigger",
+        "BrnDrawer"
+      ],
+      "helmComponents": [
+        "HlmDrawerClose",
+        "HlmDrawerContent",
+        "HlmDrawerDescription",
+        "HlmDrawerFooter",
+        "HlmDrawerHeader",
+        "HlmDrawerOverlay",
+        "HlmDrawerPortal",
+        "HlmDrawerTitle",
+        "HlmDrawerTrigger",
+        "HlmDrawer"
+      ],
+      "category": "misc",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/drawer"
+    },
     "dropdown-menu": {
       "name": "dropdown-menu",
       "brainAvailable": false,
@@ -521,15 +559,18 @@
       "brainDirectives": [],
       "helmComponents": [
         "HlmDropdownMenuCheckboxIndicator",
+        "HlmDropdownMenuCheckboxCdk",
         "HlmDropdownMenuCheckbox",
         "HlmDropdownMenuGroup",
         "HlmDropdownMenuItemSubIndicator",
         "HlmDropdownMenuItem",
         "HlmDropdownMenuLabel",
         "HlmDropdownMenuRadioIndicator",
+        "HlmDropdownMenuRadioCdk",
         "HlmDropdownMenuRadio",
         "HlmDropdownMenuSeparator",
         "HlmDropdownMenuShortcut",
+        "HlmDropdownMenuSubTrigger",
         "HlmDropdownMenuSub",
         "HlmDropdownMenuTrigger",
         "HlmDropdownMenu"
@@ -612,22 +653,6 @@
         "@angular/cdk"
       ],
       "url": "https://www.spartan.ng/components/hover-card"
-    },
-    "icon": {
-      "name": "icon",
-      "brainAvailable": false,
-      "helmAvailable": true,
-      "brainPackage": "@spartan-ng/brain/icon",
-      "helmPackage": "@spartan-ng/helm/icon",
-      "brainDirectives": [],
-      "helmComponents": [
-        "HlmIcon"
-      ],
-      "category": "typography",
-      "peerDependencies": [
-        "@angular/cdk"
-      ],
-      "url": "https://www.spartan.ng/components/icon"
     },
     "input": {
       "name": "input",
@@ -816,6 +841,25 @@
       ],
       "url": "https://www.spartan.ng/components/navigation-menu"
     },
+    "overlay": {
+      "name": "overlay",
+      "brainAvailable": true,
+      "helmAvailable": false,
+      "brainPackage": "@spartan-ng/brain/overlay",
+      "helmPackage": "@spartan-ng/helm/overlay",
+      "brainDirectives": [
+        "BrnOverlayClose",
+        "BrnOverlayContent",
+        "BrnOverlayTrigger",
+        "BrnOverlay"
+      ],
+      "helmComponents": [],
+      "category": "misc",
+      "peerDependencies": [
+        "@angular/cdk"
+      ],
+      "url": "https://www.spartan.ng/components/overlay"
+    },
     "pagination": {
       "name": "pagination",
       "brainAvailable": false,
@@ -853,7 +897,10 @@
       ],
       "helmComponents": [
         "HlmPopoverContent",
+        "HlmPopoverDescription",
+        "HlmPopoverHeader",
         "HlmPopoverPortal",
+        "HlmPopoverTitle",
         "HlmPopoverTrigger",
         "HlmPopover"
       ],
