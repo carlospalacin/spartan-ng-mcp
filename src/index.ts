@@ -9,7 +9,7 @@ import { registerPromptHandlers } from './prompts/workflows.js';
 import { RegistryLoader } from './registry/registry.js';
 import { resolveCacheDir } from './utils/paths.js';
 import { registerResourceHandlers } from './resources/spartan.js';
-import { createServer, registerToolGroup } from './server.js';
+import { createServer, DEPRECATION_NOTICE, registerToolGroup } from './server.js';
 import { createCacheTools } from './tools/cache.js';
 import { createContextTools } from './tools/context.js';
 import { createDependencyTools } from './tools/dependencies.js';
@@ -20,6 +20,8 @@ import { createSkillsTools } from './tools/skills.js';
 import { createSourceTools } from './tools/source.js';
 
 async function main(): Promise<void> {
+  console.error(`[DEPRECATED] ${DEPRECATION_NOTICE}`);
+
   // Initialize core services
   const cacheDir = resolveCacheDir();
   const cacheManager = new CacheManager(cacheDir);

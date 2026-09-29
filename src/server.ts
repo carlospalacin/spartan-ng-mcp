@@ -64,9 +64,17 @@ export function registerToolGroup(server: McpServer, tools: ToolDefinition[]): v
   }
 }
 
+export const DEPRECATION_NOTICE =
+  'spartan-ng-mcp is deprecated and no longer maintained. Its registry data is frozen and ' +
+  'may be missing recent Spartan components. Use the official @spartan-ng/mcp server instead ' +
+  '(https://www.spartan.ng/documentation/mcp).';
+
 export function createServer(): McpServer {
-  return new McpServer({
-    name: 'spartan-ng-mcp',
-    version: '2.0.0',
-  });
+  return new McpServer(
+    {
+      name: 'spartan-ng-mcp',
+      version: '2.0.0',
+    },
+    { instructions: DEPRECATION_NOTICE },
+  );
 }
