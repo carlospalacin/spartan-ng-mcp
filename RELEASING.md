@@ -1,5 +1,8 @@
 # Releasing
 
+> [!NOTE]
+> This project is deprecated. The automated registry-refresh lane below has been removed (its workflows were deleted because the Spartan Analog API is gone). Only the manual lane remains, for a final deprecation release if ever needed.
+
 This project has **two release lanes**. They must not be used for the same version.
 
 ## 1. Automated registry-refresh lane (CI)

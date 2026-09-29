@@ -1,5 +1,13 @@
 # spartan-ng-mcp
 
+> [!WARNING]
+> **This project is deprecated and no longer maintained.**
+> Use the official Spartan MCP server instead: [`@spartan-ng/mcp`](https://www.npmjs.com/package/@spartan-ng/mcp) ([docs](https://www.spartan.ng/documentation/mcp), [source](https://github.com/spartan-ng/spartan/tree/main/libs/mcp)).
+>
+> The Spartan Analog API this server relied on for registry data is no longer available, so the bundled registry is frozen and runtime refresh no longer works. The package stays on npm for existing users but will not receive updates.
+>
+> To migrate, replace `"args": ["-y", "spartan-ng-mcp"]` with `"args": ["-y", "@spartan-ng/mcp"]` in your MCP client config.
+
 An MCP (Model Context Protocol) server that exposes the **Spartan Angular UI** ecosystem as intelligent tools for AI-powered IDEs and assistants. Discover components, browse Brain/Helm APIs, fetch source code, generate install commands, detect project context, and use page-level building blocks — all through the MCP protocol.
 
 ## Why
